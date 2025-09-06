@@ -1,0 +1,22 @@
+import React from 'react';
+import Banner from '../../Components/Banner/Banner';
+import Card from '../../Components/Card/Card';
+import Category from '../../Components/Category/Category';
+import ProductCard from '../../Components/ProductCard/ProductCard';
+import LatestProducts from '../../Components/LatestProducts/LatestProducts';
+import ContactIcon from '../../Components/ContactIcon/ContactIcon';
+
+const Home = () => {
+  return (
+    <div className="max-w-7xl mx-auto px-4">
+      <Banner></Banner>
+      <Card></Card>
+      <Category></Category>
+      <LatestProducts></LatestProducts>
+      <ProductCard></ProductCard>
+      <ContactIcon></ContactIcon>
+    </div>
+  );
+};
+
+export default Home;

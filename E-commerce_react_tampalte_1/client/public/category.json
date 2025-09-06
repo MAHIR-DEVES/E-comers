@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "name": "Electronics",
+    "image": "https://images.unsplash.com/photo-1468495244123-6c6c332eeece?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60",
+    "products": 128
+  },
+  {
+    "id": 2,
+    "name": "Fashion",
+    "image": "https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60",
+    "products": 245
+  },
+  {
+    "id": 3,
+    "name": "Home & Kitchen",
+    "image": "https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60",
+    "products": 187
+  },
+  {
+    "id": 4,
+    "name": "Beauty",
+    "image": "https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60",
+    "products": 92
+  },
+  {
+    "id": 5,
+    "name": "Sports",
+    "image": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60",
+    "products": 76
+  },
+  {
+    "id": 6,
+    "name": "Books",
+    "image": "https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60",
+    "products": 312
+  },
+  {
+    "id": 7,
+    "name": "Toys",
+    "image": "https://images.unsplash.com/photo-1587654780291-39c9404d746b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60",
+    "products": 54
+  },
+  {
+    "id": 8,
+    "name": "Food",
+    "image": "https://images.unsplash.com/photo-1490645935967-10de6ba17061?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60",
+    "products": 168
+  }
+]

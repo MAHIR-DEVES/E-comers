@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap');
+.main-landing .top_section{
+    width: 94%;
+    border-radius: 10px;
+    color: #ffffff; 
+    font-size: 32px;
+    font-family: 'Hind Siliguri', sans-serif !important;
+    margin: 0 auto;
+    padding: 15px;text-align: center;
+}
+.top-heading-title{
+    color: #fff;
+    margin-top: 0px;
+    text-align: center;
+    padding: 20px 0px;
+    background: #ff730b;
+    border-radius: 10px;
+    width: 83%;
+    margin: 0 auto;
+}
+.inner-padding .btn{
+    /* background: #ff730b; */
+    border: 3px solid #AD7419;
+    font-family: 'Hind Siliguri', sans-serif !important;
+    font-size:26px;
+    font-weight:bold;
+}
+.inner-padding .btn .hover{
+    background: red;   
+}
+.elementor-element-button{
+    background: #ff730b;
+    background: #ff730b;
+    width: 100%;
+    border-radius: 10px;
+    color: #ffffff; 
+    font-size: 32px;
+    font-family: 'Hind Siliguri', sans-serif !important;
+    margin: 0 auto;
+    text-align: center;
+    padding: 15px;margin-top: 20px;
+}
+.element-widget .left_side_text{
+    border: 9px solid #ff730b;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 25px;
+    font-family: 'Hind Siliguri', sans-serif !important;
+    font-weight: 600;
+}
+.left_side_details{
+    border: 1px solid #f3f3f3;
+    border-radius:12px;
+    box-shadow: 5px 5px 14px 5px rgba(0, 0, 0, 0.2);
+}
+ul li{
+    line-height: 1.5;
+    padding: 14px;
+    border-bottom: 1px solid #ff730b;
+    font-size: 14px;
+}
+.element-widget-cover-display {
+    width: 100%;
+    margin: 25px 0;
+    padding: 5px 70px; /* Adjust the value as needed */
+}
+.element-widget-wrap{
+    border-style: solid;
+    border-width: 10px 10px 10px 10px;
+    border-color: #ff730b;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+    border-radius: 0.3s;
+    box-shadow: 0.3s;
+    padding: 30px 40px 30px 40px;
+    border-radius: 10px 10px 10px 10px;
+}
+.review_slider {
+    padding: 15px; 
+    text-align: center; 
+
+}
+.element-widget-wrap-form{
+    border-style: solid;
+    border-width: 10px 10px 10px 10px;
+    border-color: #ff730b;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+    border-radius: 0.3s;
+    box-shadow: 0.3s;
+    margin-left:70px;
+    margin-right:70px;
+    border-radius: 10px 10px 10px 10px;
+}
+
+.sizes{
+    display: flex;
+}
+.sizes .size {
+    padding: 3px;
+    margin: 5px;
+    border: 1px solid #c2050b;
+    width: auto;
+    text-align: center;
+    cursor: pointer;
+}
+.sizes .size.active{
+    background: #c2050b;
+    color: white;
+}
+.increase-qty {
+        width: 32px;
+        display: block;
+        float: left;
+        line-height: 26px;
+        cursor: pointer;
+        text-align: center;
+        font-size: 16px;
+        font-weight: 300;
+        color: #000;
+        height: 32px;
+        background: #f6f7fb;
+        border-radius: 50%;
+        transition: .3s;
+        border: 2px solid rgba(0,0,0,0);
+        background: #ffffff;
+        border: 1px solid #ddd;
+        border-radius: 10%;
+}
+.decrease-qty {
+        width: 32px;
+        display: block;
+        float: left;
+        line-height: 26px;
+        cursor: pointer;
+        text-align: center;
+        font-size: 16px;
+        font-weight: 300;
+        color: #000;
+        height: 32px;
+        background: #f6f7fb;
+        border-radius: 50%;
+        transition: .3s;
+        border: 2px solid rgba(0,0,0,0);
+        background: #ffffff;
+        border: 1px solid #ddd;
+        border-radius: 10%;
+}
+.payment_methods{
+    background-color:#f6f7fb;
+    height:180px;
+    width:90%;
+}
+.payment_methods .payment_method .payment_box {
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 1em;
+    margin: 1em 0;
+    font-size: 18px;
+    border-radius: 2px;
+    line-height: 1.5;
+    background-color: #dfdcde;
+    color: #515151;
+    background-color: #eaeaea;
+    font-family: inherit;
+    font-weight: inherit;
+    margin-bottom: 0.5em;
+}
+.place-order button {
+    text=align:center;
+    margin-bottom:20px;
+    margin-right:50px;
+    border: 1px solid white;
+    background-color: #ff730b;
+    letter-spacing: 0.5px;
+    width: 90%;
+    padding: 16px 24px;
+    line-height: 1.5;
+    float: right;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+    border-radius: 30px 30px 30px 30px;
+    font-size: 20px;
+}
+
+

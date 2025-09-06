@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "name": "Organic Foods",
+    "image": "https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60",
+    "products": 156
+  },
+  {
+    "id": 2,
+    "name": "Natural Skincare",
+    "image": "https://amoliskincare.com/wp-content/uploads/2024/04/Amoli-Skincare-Natural-Skincare-Solutions.jpg",
+    "products": 98
+  },
+  {
+    "id": 3,
+    "name": "Herbal Supplements",
+    "image": "https://www.nchealthinfo.org/wp-content/uploads/2019/08/HerbsAndSupplements.jpg",
+    "products": 124
+  },
+  {
+    "id": 4,
+    "name": "Essential Oils",
+    "image": "https://media.post.rvohealth.io/wp-content/uploads/sites/3/2024/10/Essential-oils-GettyImages-2173783517-Header-1024x575.jpg",
+    "products": 87
+  },
+  {
+    "id": 5,
+    "name": "Natural Hair Care",
+    "image": "https://thumbs.dreamstime.com/b/flat-lay-composition-natural-ingredients-hair-care-marble-background-151357586.jpg",
+    "products": 73
+  },
+  {
+    "id": 6,
+    "name": "Ayurvedic Products",
+    "image": "https://i0.wp.com/punarjith.com/wp-content/uploads/2024/07/punarjith-png.webp?resize=977%2C668&ssl=1",
+    "products": 112
+  },
+  {
+    "id": 7,
+    "name": "Eco-friendly Home",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStFD_7Rq-kBw3pGxVM6PMPcAGtjRZVmtDgqw&s",
+    "products": 135
+  },
+  {
+    "id": 8,
+    "name": "Natural Baby Care",
+    "image": "https://www.thenaturalwash.com/cdn/shop/articles/Blog_baby_care.jpg?v=1637382259&width=1100",
+    "products": 67
+  }
+]

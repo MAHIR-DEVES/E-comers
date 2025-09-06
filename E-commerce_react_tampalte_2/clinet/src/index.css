@@ -1,0 +1,9 @@
+@import 'tailwindcss';
+@plugin "daisyui";
+
+@theme {
+  --color-text-500: #38b000;
+  --color-main-500: #006400;
+  --color-primary-500: #008000;
+  --color-hover-500: #004b23;
+}
