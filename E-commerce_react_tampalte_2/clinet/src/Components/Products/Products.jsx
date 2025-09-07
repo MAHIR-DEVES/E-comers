@@ -24,10 +24,12 @@ const Products = () => {
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl font-bold  mb-2 text-gray-800">
+        <h2 className="text-3xl font-bold  mb-2 text-text-2-500">
           Featured Products
         </h2>
-        <p className="text-gray-600  mb-10">Discover our most popular items</p>
+        <p className="text-text-4-500  mb-10">
+          Discover our most popular items
+        </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {products.map(product => (

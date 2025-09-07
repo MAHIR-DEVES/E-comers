@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <footer className="bg-sec-500 text-white pt-12 pb-8">
+    <footer className="bg-sec-500 text-text-1-500 pt-12 pb-8">
       <div className="max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
@@ -22,32 +22,32 @@ const Footer = () => {
               {' '}
               <img className="h-16" src={Logo} alt="" />
             </div>
-            <p className="text-white mb-4">
+            <p className="text-text-1-500 mb-4">
               Your trusted online shopping destination for quality products at
               affordable prices.
             </p>
             <div className="flex space-x-4">
               <a
                 href="#"
-                className="text-white hover:text-gray-400 transition-colors"
+                className="text-text-1-500 hover:text-gray-400 transition-colors"
               >
                 <FaFacebook size={20} />
               </a>
               <a
                 href="#"
-                className="text-white hover:text-gray-400 transition-colors"
+                className="text-text-1-500 hover:text-gray-400 transition-colors"
               >
                 <FaTwitter size={20} />
               </a>
               <a
                 href="#"
-                className="text-white hover:text-gray-400 transition-colors"
+                className="text-text-1-500 hover:text-gray-400 transition-colors"
               >
                 <FaInstagram size={20} />
               </a>
               <a
                 href="#"
-                className="text-white hover:text-gray-400 transition-colors"
+                className="text-text-1-500 hover:text-gray-400 transition-colors"
               >
                 <FaLinkedin size={20} />
               </a>
@@ -61,7 +61,7 @@ const Footer = () => {
               <li>
                 <a
                   href="#"
-                  className="text-white hover:text-white transition-colors"
+                  className="text-text-1-500 hover:text-text-1-500 transition-colors"
                 >
                   Home
                 </a>
@@ -69,7 +69,7 @@ const Footer = () => {
               <li>
                 <a
                   href="#"
-                  className="text-white hover:text-gray-400 transition-colors"
+                  className="text-text-1-500 hover:text-gray-400 transition-colors"
                 >
                   Products
                 </a>
@@ -77,7 +77,7 @@ const Footer = () => {
               <li>
                 <a
                   href="#"
-                  className="text-white hover:text-gray-400 transition-colors"
+                  className="text-text-1-500 hover:text-gray-400 transition-colors"
                 >
                   Categories
                 </a>
@@ -85,7 +85,7 @@ const Footer = () => {
               <li>
                 <a
                   href="#"
-                  className="text-white hover:text-gray-400 transition-colors"
+                  className="text-text-1-500 hover:text-gray-400 transition-colors"
                 >
                   About Us
                 </a>
@@ -93,7 +93,7 @@ const Footer = () => {
               <li>
                 <a
                   href="#"
-                  className="text-white hover:text-gray-400 transition-colors"
+                  className="text-text-1-500 hover:text-gray-400 transition-colors"
                 >
                   Contact
                 </a>
@@ -108,7 +108,7 @@ const Footer = () => {
               <li>
                 <a
                   href="#"
-                  className="text-white hover:text-gray-400 transition-colors"
+                  className="text-text-1-500 hover:text-gray-400 transition-colors"
                 >
                   FAQ
                 </a>
@@ -116,7 +116,7 @@ const Footer = () => {
               <li>
                 <a
                   href="#"
-                  className="text-white hover:text-gray-400 transition-colors"
+                  className="text-text-1-500 hover:text-gray-400 transition-colors"
                 >
                   Returns & Refunds
                 </a>
@@ -124,7 +124,7 @@ const Footer = () => {
               <li>
                 <a
                   href="#"
-                  className="text-white hover:text-gray-400 transition-colors"
+                  className="text-text-1-500 hover:text-gray-400 transition-colors"
                 >
                   Shipping Policy
                 </a>
@@ -132,7 +132,7 @@ const Footer = () => {
               <li>
                 <a
                   href="#"
-                  className="text-white hover:text-gray-400 transition-colors"
+                  className="text-text-1-500 hover:text-gray-400 transition-colors"
                 >
                   Privacy Policy
                 </a>
@@ -140,7 +140,7 @@ const Footer = () => {
               <li>
                 <a
                   href="#"
-                  className="text-white hover:text-gray-400 transition-colors"
+                  className="text-text-1-500 hover:text-gray-400 transition-colors"
                 >
                   Terms & Conditions
                 </a>
@@ -153,27 +153,31 @@ const Footer = () => {
             <h4 className="text-lg font-semibold mb-4">Contact Us</h4>
             <div className="space-y-3">
               <div className="flex items-start">
-                <FaMapMarkerAlt className="mt-1 mr-3 text-text-500" />
-                <span className="text-white">Dhaka, Bangladesh</span>
+                <FaMapMarkerAlt className="mt-1 mr-3 text-text-1-500" />
+                <span className="text-text-1-500">Dhaka, Bangladesh</span>
               </div>
               <div className="flex items-center">
-                <FaPhone className="mr-3 text-text-500" />
-                <span className="text-white">+8801700000000</span>
+                <FaPhone className="mr-3 text-text-1-500" />
+                <span className="text-text-1-500">+8801700000000</span>
               </div>
               <div className="flex items-center">
-                <FaEnvelope className="mr-3 text-text-500" />
-                <span className="text-white">info@onlineshop.com</span>
+                <FaEnvelope className="mr-3 text-text-1-500" />
+                <span className="text-text-1-500">info@onlineshop.com</span>
               </div>
             </div>
           </div>
         </div>
 
         {/* Copyright */}
-        <div className="mt-8 text-center text-white text-sm">
+        <div className="mt-8 text-center text-text-1-500 text-sm">
           <p>
             &copy; {new Date().getFullYear()}
-            Online Buzz. All rights reserved.|| Design And Developed by ||{' '}
-            <Link target="_blank" to={'https://creativesoftware.com.bd/'}>
+            Online Buzz. All rights reserved.|| Design And Developed by{' '}
+            <Link
+              className="text-blue-400"
+              target="_blank"
+              to={'https://creativesoftware.com.bd/'}
+            >
               Creative Software
             </Link>
           </p>

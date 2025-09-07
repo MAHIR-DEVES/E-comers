@@ -30,9 +30,10 @@ const ContactIcon = () => {
         <div>
           <button
             onClick={scrollToTop}
-            className="bg-sec-500 hover:bg-green-500 p-4 rounded-full shadow-lg transition-transform transform hover:scale-110 flex items-center justify-center w-14 h-14"
+            className="bg-sec-500 hover:bg-sec-hover-500 p-4 rounded-full shadow-lg transition-transform transform hover:scale-110 flex items-center justify-center w-14 h-14"
           >
-            <FaArrowUp size={30} color="white" />
+            {/* Add bounce animation */}
+            <FaArrowUp size={30} color="white" className="animate-bounce" />
           </button>
         </div>
       </div>

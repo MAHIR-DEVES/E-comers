@@ -65,7 +65,7 @@ const CartDropdown = () => {
                 </h5>
                 <p className="text-xs text-gray-500">{item.brand}</p>
                 <div className="flex items-center justify-between mt-1">
-                  <span className="text-sm font-bold text-text-500">
+                  <span className="text-sm font-bold text-text-2-500">
                     ${item.discountPrice || item.price}
                   </span>
                 </div>
@@ -88,7 +88,7 @@ const CartDropdown = () => {
         <div className="border-t border-gray-200 p-4 bg-gray-50 rounded-b-lg">
           <div className="flex justify-between items-center mb-3">
             <span className="text-gray-600">Subtotal:</span>
-            <span className="text-lg font-bold text-text-500">
+            <span className="text-lg font-bold text-text-2-500">
               ${calculateTotal().toFixed(2)}
             </span>
           </div>

@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FaFire, FaChevronRight, FaChevronLeft } from 'react-icons/fa';
-import { useCart } from '../../Context/CartContext';
+
 import ProductsCard from '../ProductCard/ProductsCard';
 
 const LatestProducts = () => {
   const [products, setProducts] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visibleItems, setVisibleItems] = useState(4);
-  const { addToCart } = useCart();
 
   // Fetch products
   useEffect(() => {
@@ -62,19 +61,19 @@ const LatestProducts = () => {
   };
 
   return (
-    <div className="bg-gradient-to-b from-white to-gray-50 py-10">
+    <div className=" py-10">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-8">
           <div className="flex items-center mb-4 md:mb-0">
-            <div className="bg-text-500 text-white p-2 rounded-lg mr-3">
+            <div className="bg-text-3-500 text-white p-2 rounded-lg mr-3">
               <FaFire className="text-xl" />
             </div>
             <div>
-              <h2 className="text-3xl font-bold text-gray-800">
+              <h2 className="text-3xl font-bold text-text-2-500">
                 Latest Products
               </h2>
-              <p className="text-gray-600 mt-1">
+              <p className="text-text-4-500 mt-1">
                 Just arrived! Check out our newest items
               </p>
             </div>
@@ -84,20 +83,20 @@ const LatestProducts = () => {
             <div className="hidden md:flex space-x-2">
               <button
                 onClick={prevSlide}
-                className="p-3 bg-white rounded-full shadow-md hover:bg-purple-100 text-text-500 transition-colors"
+                className="p-3 bg-white rounded-full shadow-md hover:bg-hover-500 text-text-3-500 transition-colors"
                 aria-label="Previous products"
               >
                 <FaChevronLeft />
               </button>
               <button
                 onClick={nextSlide}
-                className="p-3 bg-white rounded-full shadow-md hover:bg-purple-100 text-text-500 transition-colors"
+                className="p-3 bg-white rounded-full shadow-md hover:bg-hover-500 text-text-3-500 transition-colors"
                 aria-label="Next products"
               >
                 <FaChevronRight />
               </button>
             </div>
-            <button className="flex items-center text-text-500 font-medium hover:text-green-500 transition-colors">
+            <button className="flex items-center text-text-3-500 font-medium hover:text-primary-500 transition-colors">
               View all products
               <FaChevronRight className="ml-2" />
             </button>
@@ -131,13 +130,13 @@ const LatestProducts = () => {
           <div className="flex justify-center mt-6 space-x-4 md:hidden">
             <button
               onClick={prevSlide}
-              className="p-3 bg-white rounded-full shadow-md hover:bg-green-100 text-text-500 transition-colors"
+              className="p-3 bg-white rounded-full shadow-md hover:bg-green-100 text-text-2-500 transition-colors"
             >
               <FaChevronLeft />
             </button>
             <button
               onClick={nextSlide}
-              className="p-3 bg-white rounded-full shadow-md hover:bg-green-100 text-text-500 transition-colors"
+              className="p-3 bg-white rounded-full shadow-md hover:bg-green-100 text-text-2-500 transition-colors"
             >
               <FaChevronRight />
             </button>
@@ -154,8 +153,8 @@ const LatestProducts = () => {
                 className={`w-2 h-2 rounded-full transition-all ${
                   currentIndex >= index * visibleItems &&
                   currentIndex < (index + 1) * visibleItems
-                    ? 'bg-text-500 w-6'
-                    : 'bg-gray-300'
+                    ? 'bg-text-3-500 w-6'
+                    : 'bg-sec-500'
                 }`}
                 aria-label={`Go to slide ${index + 1}`}
               />
