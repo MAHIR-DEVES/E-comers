@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <footer className="bg-[#004b23] text-white pt-12 pb-8">
+    <footer className="bg-sec-500 text-white pt-12 pb-8">
       <div className="max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
@@ -153,15 +153,15 @@ const Footer = () => {
             <h4 className="text-lg font-semibold mb-4">Contact Us</h4>
             <div className="space-y-3">
               <div className="flex items-start">
-                <FaMapMarkerAlt className="mt-1 mr-3 text-purple-400" />
+                <FaMapMarkerAlt className="mt-1 mr-3 text-text-500" />
                 <span className="text-white">Dhaka, Bangladesh</span>
               </div>
               <div className="flex items-center">
-                <FaPhone className="mr-3 text-purple-400" />
+                <FaPhone className="mr-3 text-text-500" />
                 <span className="text-white">+8801700000000</span>
               </div>
               <div className="flex items-center">
-                <FaEnvelope className="mr-3 text-purple-400" />
+                <FaEnvelope className="mr-3 text-text-500" />
                 <span className="text-white">info@onlineshop.com</span>
               </div>
             </div>
@@ -171,8 +171,11 @@ const Footer = () => {
         {/* Copyright */}
         <div className="mt-8 text-center text-white text-sm">
           <p>
-            &copy; {new Date().getFullYear()} <Link to={'/#'}>Link Here </Link>{' '}
-            Online Buzz. All rights reserved.
+            &copy; {new Date().getFullYear()}
+            Online Buzz. All rights reserved.|| Design And Developed by ||{' '}
+            <Link target="_blank" to={'https://creativesoftware.com.bd/'}>
+              Creative Software
+            </Link>
           </p>
         </div>
       </div>

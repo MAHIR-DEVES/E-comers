@@ -107,14 +107,14 @@ const ProductDetails = () => {
 
             {/* Product Info */}
             <div className="py-4">
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">
+              <h1 className="text-3xl font-bold text-product-text-500 mb-2">
                 {product.name}
               </h1>
 
               {/* Rating */}
               <div className="flex items-center mb-4">
                 <div className="flex mr-2">{renderRating(product.rating)}</div>
-                <span className="text-gray-600">
+                <span className="text-sec-product-text-500">
                   ({product.reviews} reviews)
                 </span>
               </div>
@@ -126,7 +126,7 @@ const ProductDetails = () => {
                     <span className="text-3xl font-bold text-text-500">
                       ${product.discountPrice}
                     </span>
-                    <span className="text-xl text-gray-500 line-through ml-3">
+                    <span className="text-xl text-sec-product-text-500 line-through ml-3">
                       ${product.price}
                     </span>
                     <span className="ml-4 bg-green-100 text-green-600 px-2 py-1 rounded-md text-sm font-medium">
@@ -141,16 +141,16 @@ const ProductDetails = () => {
               </div>
 
               {/* Description */}
-              <p className="text-gray-600 mb-6 leading-relaxed">
+              <p className="text-sec-product-text-500 mb-6 leading-relaxed">
                 {product.description}
               </p>
 
               {/* Features */}
               <div className="mb-6">
-                <h3 className="font-semibold text-gray-800 mb-2">
+                <h3 className="font-semibold text-product-text-500 mb-2">
                   Key Features:
                 </h3>
-                <ol className="list-disc list-inside text-gray-600 space-y-1">
+                <ol className="list-disc list-inside text-sec-product-text-500 space-y-1">
                   {features.map((feature, index) => (
                     <li key={index}>{feature}</li>
                   ))}
@@ -181,7 +181,7 @@ const ProductDetails = () => {
                   <div className="flex flex-1 gap-2">
                     <button
                       onClick={() => setIsModalOpen(true)}
-                      className="flex-1 bg-primary-500 hover:bg-hover-500 text-white py-2 rounded-lg flex items-center justify-center transition-colors"
+                      className="flex-1 bg-primary-500 hover:bg-sec-hover-500 text-white py-2 rounded-lg flex items-center justify-center transition-colors"
                     >
                       <MdOutlineShoppingBag className="mr-2" /> Order Now
                     </button>
@@ -194,7 +194,7 @@ const ProductDetails = () => {
 
                     <button
                       onClick={() => addToCart(product)}
-                      className="flex-1 bg-primary-500 hover:bg-hover-500 text-white py-2 rounded-lg flex items-center justify-center transition-colors"
+                      className="flex-1 bg-primary-500 hover:bg-sec-hover-500 text-white py-2 rounded-lg flex items-center justify-center transition-colors"
                     >
                       <FaShoppingCart className="mr-2" /> Add to Cart
                     </button>
@@ -204,7 +204,7 @@ const ProductDetails = () => {
 
               {/* Product Meta */}
               <div className="border-t border-gray-200 pt-4">
-                <div className="grid grid-cols-2 gap-4 text-sm text-gray-600">
+                <div className="grid grid-cols-2 gap-4 text-sm text-sec-product-text-500">
                   <div>
                     <span className="font-medium">SKU:</span> {product.sku}
                   </div>
@@ -217,13 +217,13 @@ const ProductDetails = () => {
 
               {/* Trust Badges */}
               <div className="mt-6 flex flex-wrap gap-4">
-                <div className="flex items-center text-sm text-gray-600">
+                <div className="flex items-center text-sm text-sec-product-text-500">
                   <FaTruck className="text-text-500 mr-2" /> Free shipping
                 </div>
-                <div className="flex items-center text-sm text-gray-600">
+                <div className="flex items-center text-sm text-sec-product-text-500">
                   <FaUndo className="text-text-500  mr-2" /> 30-day returns
                 </div>
-                <div className="flex items-center text-sm text-gray-600">
+                <div className="flex items-center text-sm text-sec-product-text-500">
                   <FaShieldAlt className="text-text-500  mr-2" /> 2-year
                   warranty
                 </div>

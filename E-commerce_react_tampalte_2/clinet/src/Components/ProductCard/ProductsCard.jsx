@@ -28,10 +28,10 @@ const ProductsCard = ({ product }) => {
 
           {/* Product Info */}
           <div className="p-4">
-            <h3 className="text-lg font-semibold text-gray-800 mb-1 truncate">
+            <h3 className="text-lg font-semibold text-product-text-500 mb-1 truncate">
               {product.name}
             </h3>
-            <p className="text-gray-600 text-sm mb-3 line-clamp-2 h-10">
+            <p className="text-sec-product-text-500 text-sm mb-3 line-clamp-2 h-10">
               {product.description}
             </p>
 
@@ -42,7 +42,7 @@ const ProductsCard = ({ product }) => {
                   <span className="text-2xl font-bold text-text-500">
                     ${product.discountPrice}
                   </span>
-                  <span className="text-lg text-gray-500 line-through ml-2">
+                  <span className="text-lg text-sec-product-text-500 line-through ml-2">
                     ${product.price}
                   </span>
                 </>
@@ -59,7 +59,7 @@ const ProductsCard = ({ product }) => {
       <div className="flex  overflow-hidden border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300">
         <Link
           to={`/product-details/${product.id}`}
-          className="flex-1 bg-white text-text-500 py-2.5 px-4 flex items-center justify-center transition-all duration-200 hover:bg-green-50 border-r border-gray-200 group"
+          className="flex-1 bg-white text-text-500 py-2.5 px-4 flex items-center justify-center transition-all duration-200 hover:bg-hover-500 border-r border-gray-200 group"
         >
           <svg
             className="w-5 h-5 mr-2"
@@ -86,7 +86,7 @@ const ProductsCard = ({ product }) => {
 
         <button
           onClick={() => addToCart(product)}
-          className="flex-1 bg-white text-text-500 py-2.5 px-4 flex items-center justify-center transition-all duration-200 hover:bg-green-50 group relative"
+          className="flex-1 bg-white text-text-500 py-2.5 px-4 flex items-center justify-center transition-all duration-200 hover:bg-hover-500 group relative"
         >
           <svg
             className="w-5 h-5 mr-2"

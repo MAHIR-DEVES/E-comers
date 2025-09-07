@@ -23,9 +23,9 @@ const CartDropdown = () => {
   };
 
   return (
-    <div className="absolute right-0 mt-2 w-80 bg-white shadow-xl rounded-lg z-50 border border-gray-200 transform origin-top-right transition-all duration-200">
+    <div className="absolute right-0 mt-2 w-80 bg-white shadow-xl rounded-lg z-100 border border-gray-200 transform origin-top-right transition-all duration-200">
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-[#f94144] to-purple-600 text-white rounded-t-lg">
+      <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-[#007200] to-[#70e000] text-white rounded-t-lg">
         <div className="flex items-center">
           <FaShoppingCart className="mr-2" />
           <h4 className="font-semibold">Your Shopping Cart</h4>
@@ -65,7 +65,7 @@ const CartDropdown = () => {
                 </h5>
                 <p className="text-xs text-gray-500">{item.brand}</p>
                 <div className="flex items-center justify-between mt-1">
-                  <span className="text-sm font-bold text-purple-700">
+                  <span className="text-sm font-bold text-text-500">
                     ${item.discountPrice || item.price}
                   </span>
                 </div>
@@ -88,13 +88,13 @@ const CartDropdown = () => {
         <div className="border-t border-gray-200 p-4 bg-gray-50 rounded-b-lg">
           <div className="flex justify-between items-center mb-3">
             <span className="text-gray-600">Subtotal:</span>
-            <span className="text-lg font-bold text-purple-700">
+            <span className="text-lg font-bold text-text-500">
               ${calculateTotal().toFixed(2)}
             </span>
           </div>
           <button
             onClick={() => setIsModalOpen(true)}
-            className="w-full bg-gradient-to-r from-[#f94144] to-purple-600 hover:from-[#dd2d4a] hover:to-purple-700 text-white py-2.5 px-4 rounded-md font-medium flex items-center justify-center transition-all duration-200 shadow-md hover:shadow-lg"
+            className="w-full bg-gradient-to-r from-[#007200] to-[#70e000] hover:from-[#035303] hover:to-[#61c003] text-white py-2.5 px-4 rounded-md font-medium flex items-center justify-center transition-all duration-200 shadow-md hover:shadow-lg"
           >
             Proceed to Checkout
             <FaArrowRight className="ml-2" size={14} />
