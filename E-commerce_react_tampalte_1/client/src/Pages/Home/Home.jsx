@@ -2,9 +2,10 @@ import React from 'react';
 import Banner from '../../Components/Banner/Banner';
 import Card from '../../Components/Card/Card';
 import Category from '../../Components/Category/Category';
-import ProductCard from '../../Components/ProductCard/ProductCard';
+
 import LatestProducts from '../../Components/LatestProducts/LatestProducts';
 import ContactIcon from '../../Components/ContactIcon/ContactIcon';
+import Products from '../../Components/Products/Products';
 
 const Home = () => {
   return (
@@ -13,7 +14,7 @@ const Home = () => {
       <Card></Card>
       <Category></Category>
       <LatestProducts></LatestProducts>
-      <ProductCard></ProductCard>
+      <Products></Products>
       <ContactIcon></ContactIcon>
     </div>
   );

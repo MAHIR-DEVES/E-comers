@@ -65,35 +65,37 @@ const Category = () => {
   };
 
   return (
-    <div className="bg-gradient-to-b from-gray-50 to-white py-10 ">
+    <div className=" py-10 ">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-8">
           <div className="mb-4 md:mb-0">
-            <h2 className="text-3xl font-bold text-gray-800">
+            <h2 className="text-3xl font-bold text-text-2-500">
               Shop by Category
             </h2>
-            <p className="text-gray-600 mt-2">Discover products by category</p>
+            <p className="text-text-3-500 mt-2">
+              Discover products by category
+            </p>
           </div>
 
           <div className="flex items-center space-x-4">
             <div className="hidden md:flex space-x-2">
               <button
                 onClick={prevSlide}
-                className="p-3 bg-white rounded-full shadow-md hover:bg-purple-100 text-purple-700 transition-colors"
+                className="p-3 bg-white rounded-full shadow-md hover:bg-product-btn-hover-500 text-primary-500 transition-colors"
                 aria-label="Previous categories"
               >
                 <FaChevronLeft />
               </button>
               <button
                 onClick={nextSlide}
-                className="p-3 bg-white rounded-full shadow-md hover:bg-purple-100 text-purple-700 transition-colors"
+                className="p-3 bg-white rounded-full shadow-md hover:bg-product-btn-hover-500 text-primary-500 transition-colors"
                 aria-label="Next categories"
               >
                 <FaChevronRight />
               </button>
             </div>
-            <button className="flex items-center text-purple-700 font-medium hover:text-purple-900 transition-colors">
+            <button className="flex items-center text-price-text-500 font-medium hover:text-product-btn-hover-1-500 transition-colors">
               View all categories
               <FaArrowRight className="ml-2" />
             </button>
@@ -127,13 +129,13 @@ const Category = () => {
                     </div>
 
                     <div className="p-4 text-center">
-                      <h3 className="font-semibold text-gray-800 mb-1">
+                      <h3 className="font-semibold text-text-2-500 mb-1">
                         {cat.name}
                       </h3>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-sm text-text-3-500">
                         {cat.products} products
                       </p>
-                      <button className="mt-3 text-sm text-purple-700 font-medium hover:text-purple-900 transition-colors">
+                      <button className="mt-3 text-sm text-primary-500 font-medium hover:text-product-btn-hover-1-500  transition-colors">
                         Explore now
                       </button>
                     </div>
@@ -147,14 +149,14 @@ const Category = () => {
           <div className="flex justify-center mt-6 space-x-4 md:hidden">
             <button
               onClick={prevSlide}
-              className="p-3 bg-white rounded-full shadow-md hover:bg-purple-100 text-purple-700 transition-colors"
+              className="p-3 bg-white rounded-full shadow-md hover:bg-product-btn-hover-500 text-price-text-500 transition-colors"
               aria-label="Previous categories"
             >
               <FaChevronLeft />
             </button>
             <button
               onClick={nextSlide}
-              className="p-3 bg-white rounded-full shadow-md hover:bg-purple-100 text-purple-700 transition-colors"
+              className="p-3 bg-white rounded-full shadow-md hover:bg-product-btn-hover-500 text-primary-500 transition-colors"
               aria-label="Next categories"
             >
               <FaChevronRight />

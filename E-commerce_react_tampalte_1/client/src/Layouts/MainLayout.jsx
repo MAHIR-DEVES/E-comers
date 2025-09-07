@@ -5,7 +5,7 @@ import Footer from '../Shared/Footer/Footer';
 
 const MainLayout = () => {
   return (
-    <div>
+    <div className="bg-purple-50">
       <Navbar></Navbar>
       <Outlet></Outlet>
       <Footer></Footer>

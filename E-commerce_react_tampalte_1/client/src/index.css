@@ -2,7 +2,12 @@
 @plugin "daisyui";
 
 @theme {
-  --color-sec-500: ;
-  --color-main-500: #8e44ad;
   --color-primary-500: #7e22ce;
+  --color-sec-500: #4a0a77;
+  --color-text-1-500: #ffffff;
+  --color-text-2-500: #1f2937;
+  --color-text-3-500: #4b5563;
+  --color-price-text-500: #6b21a8;
+  --color-product-btn-hover-500: #ede9fe;
+  --color-product-btn-hover-1-500: #6b21a8;
 }

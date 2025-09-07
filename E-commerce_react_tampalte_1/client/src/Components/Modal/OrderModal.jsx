@@ -55,8 +55,8 @@ const OrderModal = ({ isOpen, onClose, product }) => {
             className="w-20 h-20 object-cover rounded-md"
           />
           <div>
-            <h3 className="font-semibold text-gray-800">{product.name}</h3>
-            <p className="text-purple-700 font-bold">৳ {product.price}</p>
+            <h3 className="font-semibold text-text-2-500">{product.name}</h3>
+            <p className="text-price-text-500 font-bold">৳ {product.price}</p>
           </div>
         </div>
 
@@ -64,13 +64,13 @@ const OrderModal = ({ isOpen, onClose, product }) => {
         <form onSubmit={handleSubmit} className="p-5">
           {/* Customer Info */}
           <div className="mb-6">
-            <h3 className="text-lg font-medium text-gray-800 mb-3 flex items-center">
-              <FaMapMarkerAlt className="mr-2 text-purple-600" />
+            <h3 className="text-lg font-medium text-text-2-500 mb-3 flex items-center">
+              <FaMapMarkerAlt className="mr-2 text-primary-500" />
               ডেলিভারি তথ্য
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm text-gray-700 mb-1">
+                <label className="block text-sm text-text-2-500 mb-1">
                   নাম *
                 </label>
                 <input
@@ -84,8 +84,8 @@ const OrderModal = ({ isOpen, onClose, product }) => {
                 />
               </div>
               <div>
-                <label className="block text-sm text-gray-700 mb-1 flex items-center">
-                  <FaPhone className="mr-1 text-purple-600" /> মোবাইল *
+                <label className="block text-sm text-text-2-500 mb-1 flex items-center">
+                  <FaPhone className="mr-1 text-primary-500" /> মোবাইল *
                 </label>
                 <input
                   type="tel"
@@ -102,7 +102,9 @@ const OrderModal = ({ isOpen, onClose, product }) => {
 
           {/* Address */}
           <div className="mb-6">
-            <label className="block text-sm text-gray-700 mb-1">ঠিকানা *</label>
+            <label className="block text-sm text-text-2-500 mb-1">
+              ঠিকানা *
+            </label>
             <textarea
               name="address"
               value={formData.address}
@@ -116,8 +118,8 @@ const OrderModal = ({ isOpen, onClose, product }) => {
 
           {/* Delivery Option */}
           <div className="mb-6">
-            <h3 className="text-sm font-medium text-gray-700 mb-2 flex items-center">
-              <FaTruck className="mr-2 text-purple-600" />
+            <h3 className="text-sm font-medium text-text-2-500 mb-2 flex items-center">
+              <FaTruck className="mr-2 text-primary-500" />
               ডেলিভারি অপশন *
             </h3>
             <div className="flex gap-4">
@@ -128,7 +130,7 @@ const OrderModal = ({ isOpen, onClose, product }) => {
                   value="inside_dhaka"
                   checked={formData.deliveryOption === 'inside_dhaka'}
                   onChange={handleInputChange}
-                  className="text-purple-600 focus:ring-purple-500"
+                  className="text-text-2-500 focus:ring-text-2-500"
                 />
                 <span className="ml-2">ঢাকার ভিতরে (৳ 60)</span>
               </label>
@@ -139,7 +141,7 @@ const OrderModal = ({ isOpen, onClose, product }) => {
                   value="outside_dhaka"
                   checked={formData.deliveryOption === 'outside_dhaka'}
                   onChange={handleInputChange}
-                  className="text-purple-600 focus:ring-purple-500"
+                  className="text-text-2-500 focus:ring-text-2-500"
                 />
                 <span className="ml-2">ঢাকার বাইরে (৳ 120)</span>
               </label>
@@ -148,7 +150,7 @@ const OrderModal = ({ isOpen, onClose, product }) => {
 
           {/* Order Summary */}
           <div className="bg-gray-50 p-4 rounded-lg mb-6">
-            <h3 className="text-lg font-medium text-gray-800 mb-3">
+            <h3 className="text-lg font-medium text-text-2-500 mb-3">
               অর্ডার সারাংশ
             </h3>
             <div className="flex justify-between mb-2">
@@ -161,7 +163,7 @@ const OrderModal = ({ isOpen, onClose, product }) => {
             </div>
             <div className="flex justify-between font-bold text-lg border-t pt-2">
               <span>মোট :</span>
-              <span className="text-purple-700">৳ {totalPrice}</span>
+              <span className="text-price-text-500">৳ {totalPrice}</span>
             </div>
           </div>
 
@@ -176,7 +178,7 @@ const OrderModal = ({ isOpen, onClose, product }) => {
             </button>
             <button
               type="submit"
-              className="flex-1 bg-primary-500 hover:bg-purple-700 text-white py-2 rounded-md"
+              className="flex-1 bg-primary-500 hover:bg-product-btn-hover-1-500 text-white py-2 rounded-md"
             >
               অর্ডার করুন
             </button>

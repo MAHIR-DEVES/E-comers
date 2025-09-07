@@ -4,6 +4,7 @@ import Marquee from 'react-fast-marquee';
 import { Link } from 'react-router-dom';
 import { useCart } from '../../Context/CartContext';
 import CartDropdown from '../../Components/CartDropdown/CartDropdown';
+import axios from 'axios';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,10 +12,39 @@ const Navbar = () => {
   const [showCart, setShowCart] = useState(false);
   const { cartItems } = useCart();
 
-  const handleSearch = e => {
-    e.preventDefault();
-    console.log('Searching for:', searchQuery);
-    // Implement your search logic here
+  const [searchResults, setSearchResults] = useState([]);
+  const [typingTimeout, setTypingTimeout] = useState(0);
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
+
+  const handleChange = e => {
+    const value = e.target.value;
+    setSearchQuery(value);
+
+    // Clear previous timeout
+    if (typingTimeout) clearTimeout(typingTimeout);
+
+    // Set new timeout
+    const timeout = setTimeout(() => {
+      fetchResults(value);
+    }, 500); // 500ms debounce
+
+    setTypingTimeout(timeout);
+  };
+
+  const fetchResults = async query => {
+    if (!query) {
+      setSearchResults([]);
+      return;
+    }
+
+    try {
+      const res = await axios.get(
+        `http://localhost:3000/get-products/search?q=${query}`
+      );
+      setSearchResults(res.data);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const menuItems = [
@@ -32,8 +62,8 @@ const Navbar = () => {
 
   return (
     <nav className="bg-white shadow-lg sticky top-0 z-50">
-      <div className="bg-main-500 h-9 flex items-center justify-center">
-        <div className="max-w-7xl mx-auto px-6  text-[15px] text-white">
+      <div className="bg-sec-500 h-9 flex items-center justify-center">
+        <div className="max-w-7xl mx-auto px-6  text-[15px] text-text-1-500">
           <Marquee>
             পণ্য আপনার হাতের মুঠোয়, এক ক্লিকে পণ্য বুঝে পেয়ে , ডেলিভারি ম্যানকে
             পেমেন্ট করুন। Thanks for shopping
@@ -100,22 +130,78 @@ const Navbar = () => {
           </div>
 
           {/* Search bar */}
-          <div className="hidden md:flex flex-1 max-w-xl mx-4">
-            <form onSubmit={handleSearch} className="flex w-full">
+          <div className="hidden md:flex flex-1 mx-4 relative">
+            <div className="relative w-full">
               <input
                 type="text"
-                placeholder="Search products..."
-                className="w-full px-4 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-[#8E44AD] focus:border-[#8E44AD] "
+                placeholder="Search natural products..."
+                className="w-full border-2 border-gray-200 rounded-md bg-purple-50 px-6 py-3 focus:outline-none focus:border-purple-500 transition-colors shadow-sm"
                 value={searchQuery}
-                onChange={e => setSearchQuery(e.target.value)}
+                onChange={handleChange}
+                onFocus={() => setIsSearchFocused(true)}
+                onBlur={() => setTimeout(() => setIsSearchFocused(false), 200)}
               />
-              <button
-                type="submit"
-                className="bg-main-500  text-white px-4 py-2 rounded-r-md hover:bg-[#712492]  focus:outline-none focus:ring-2 focus:ring-[#8E44AD] "
-              >
-                Search
+              <button className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-green-600">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
               </button>
-            </form>
+            </div>
+
+            {/* Dropdown results */}
+            {searchResults.length > 0 && isSearchFocused && (
+              <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-lg shadow-xl border border-gray-100 overflow-hidden z-50">
+                <div className="py-2">
+                  <div className="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                    Search Results ({searchResults.length})
+                  </div>
+                  {searchResults.map(item => (
+                    <Link
+                      key={item.id}
+                      to={`/product-details/${item.id}`}
+                      className="flex items-center px-4 py-3 hover:bg-product-btn-hover-500 transition-colors border-b border-gray-100 last:border-b-0"
+                    >
+                      <div className="flex-shrink-0 mr-3">
+                        <img
+                          src={item.image || 'https://via.placeholder.com/40'}
+                          alt={item.name}
+                          className="w-10 h-10 rounded object-cover"
+                        />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-medium text-gray-800 truncate">
+                          {item.name}
+                        </p>
+                        <p className="text-xs text-gray-500 truncate">
+                          {item.category}
+                        </p>
+                      </div>
+                      <div className="ml-2">
+                        <span className="text-price-text-500  font-semibold">
+                          ৳{item.price}
+                        </span>
+                      </div>
+                    </Link>
+                  ))}
+                  <div className="px-4 py-3 bg-gray-50 text-center">
+                    <button className="text-primary-500 text-sm font-medium hover:text-product-btn-hover-1-500">
+                      View all results
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Contact and user actions */}
@@ -170,23 +256,6 @@ const Navbar = () => {
 
                 {showCart && <CartDropdown />}
               </div>
-
-              {/* Profile */}
-              <button className="p-2 rounded-full text-gray-700 hover:bg-gray-100 focus:outline-none">
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                  ></path>
-                </svg>
-              </button>
             </div>
 
             {/* Mobile menu button */}
@@ -227,21 +296,66 @@ const Navbar = () => {
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
               {/* Mobile search */}
-              <form onSubmit={handleSearch} className="flex mb-4">
+              <div className="relative mb-4">
                 <input
                   type="text"
-                  placeholder="Search products..."
-                  className="flex-1 px-4 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                  placeholder="Search natural products..."
+                  className="w-full border-2 border-gray-200 rounded-full px-5 py-2 focus:outline-none focus:border-green-500 transition-colors"
                   value={searchQuery}
-                  onChange={e => setSearchQuery(e.target.value)}
+                  onChange={handleChange}
                 />
-                <button
-                  type="submit"
-                  className="bg-indigo-600 text-white px-4 py-2 rounded-r-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                >
-                  Search
+                <button className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                    />
+                  </svg>
                 </button>
-              </form>
+
+                {/* Mobile dropdown results */}
+                {searchResults.length > 0 && (
+                  <div className="absolute top-full left-0 right-0 mt-1 bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden z-50">
+                    <div className="py-2 max-h-60 overflow-y-auto">
+                      {searchResults.map(item => (
+                        <Link
+                          key={item.id}
+                          to={`/product-details/${item.id}`}
+                          className="flex items-center px-4 py-2 hover:bg-green-50 transition-colors border-b border-gray-100"
+                        >
+                          <div className="flex-shrink-0 mr-3">
+                            <img
+                              src={
+                                item.image || 'https://via.placeholder.com/40'
+                              }
+                              alt={item.name}
+                              className="w-8 h-8 rounded object-cover"
+                            />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm font-medium text-gray-800 truncate">
+                              {item.name}
+                            </p>
+                          </div>
+                          <div className="ml-2">
+                            <span className="text-green-600 text-sm font-semibold">
+                              ৳{item.price}
+                            </span>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
 
               {/* Mobile menu items */}
               {menuItems.map(item => (

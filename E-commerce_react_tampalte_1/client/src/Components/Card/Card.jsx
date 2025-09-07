@@ -18,7 +18,7 @@ const Card = ({ icon, title, description }) => {
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-100">
+    <div className=" p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-100">
       <div className="flex items-start space-x-4">
         {/* icon */}
         <div className="bg-gray-100 p-3 rounded-full">
@@ -26,8 +26,10 @@ const Card = ({ icon, title, description }) => {
         </div>
         {/* info */}
         <div className="flex-1">
-          <h3 className="text-lg font-semibold text-gray-800 mb-2">{title}</h3>
-          <p className="text-gray-600 leading-relaxed">{description}</p>
+          <h3 className="text-lg font-semibold text-text-2-500 mb-2">
+            {title}
+          </h3>
+          <p className="text-text-3-500 leading-relaxed">{description}</p>
         </div>
       </div>
     </div>
@@ -59,13 +61,13 @@ const CardSection = () => {
   ];
 
   return (
-    <section className="py-12 bg-gray-50">
+    <section className="py-12 ">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-800 mb-4">
+          <h2 className="text-3xl font-bold text-gtext-2-500 mb-4">
             আমাদের সেবাসমূহ
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <p className="text-text-3-500 max-w-2xl mx-auto">
             আমরা আমাদের গ্রাহকদের জন্য সর্বোচ্চ মানের সেবা প্রদান করতে
             প্রতিশ্রুতিবদ্ধ
           </p>

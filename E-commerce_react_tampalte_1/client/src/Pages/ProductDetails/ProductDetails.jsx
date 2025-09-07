@@ -107,14 +107,14 @@ const ProductDetails = () => {
 
             {/* Product Info */}
             <div className="py-4">
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">
+              <h1 className="text-3xl font-bold text-text-2-500 mb-2">
                 {product.name}
               </h1>
 
               {/* Rating */}
               <div className="flex items-center mb-4">
                 <div className="flex mr-2">{renderRating(product.rating)}</div>
-                <span className="text-gray-600">
+                <span className="text-text-2-500">
                   ({product.reviews} reviews)
                 </span>
               </div>
@@ -123,34 +123,34 @@ const ProductDetails = () => {
               <div className="mb-6">
                 {product.discountPrice ? (
                   <div className="flex items-center">
-                    <span className="text-3xl font-bold text-purple-700">
+                    <span className="text-3xl font-bold text-price-text-500">
                       ${product.discountPrice}
                     </span>
-                    <span className="text-xl text-gray-500 line-through ml-3">
+                    <span className="text-xl text-text-3-500 line-through ml-3">
                       ${product.price}
                     </span>
-                    <span className="ml-4 bg-red-100 text-red-600 px-2 py-1 rounded-md text-sm font-medium">
+                    <span className="ml-4 bg-product-btn-hover-500 text-green-600 px-2 py-1 rounded-md text-sm font-medium">
                       Save ${(product.price - product.discountPrice).toFixed(2)}
                     </span>
                   </div>
                 ) : (
-                  <span className="text-3xl font-bold text-purple-700">
+                  <span className="text-3xl font-bold text-price-text-500">
                     ${product.price}
                   </span>
                 )}
               </div>
 
               {/* Description */}
-              <p className="text-gray-600 mb-6 leading-relaxed">
+              <p className="text-text-3-500 mb-6 leading-relaxed">
                 {product.description}
               </p>
 
               {/* Features */}
               <div className="mb-6">
-                <h3 className="font-semibold text-gray-800 mb-2">
+                <h3 className="font-semibold text-text-2-500 mb-2">
                   Key Features:
                 </h3>
-                <ol className="list-disc list-inside text-gray-600 space-y-1">
+                <ol className="list-disc list-inside text-text-3-500 space-y-1">
                   {features.map((feature, index) => (
                     <li key={index}>{feature}</li>
                   ))}
@@ -181,7 +181,7 @@ const ProductDetails = () => {
                   <div className="flex flex-1 gap-2">
                     <button
                       onClick={() => setIsModalOpen(true)}
-                      className="flex-1 bg-primary-500 hover:bg-purple-800 text-white py-2 rounded-lg flex items-center justify-center transition-colors"
+                      className="flex-1 bg-primary-500 hover:bg-product-btn-hover-1-500 text-white py-2 rounded-lg flex items-center justify-center transition-colors"
                     >
                       <MdOutlineShoppingBag className="mr-2" /> Order Now
                     </button>
@@ -194,7 +194,7 @@ const ProductDetails = () => {
 
                     <button
                       onClick={() => addToCart(product)}
-                      className="flex-1 bg-primary-500 hover:bg-purple-800 text-white py-2 rounded-lg flex items-center justify-center transition-colors"
+                      className="flex-1 bg-primary-500 hover:bg-product-btn-hover-1-500 text-white py-2 rounded-lg flex items-center justify-center transition-colors"
                     >
                       <FaShoppingCart className="mr-2" /> Add to Cart
                     </button>
@@ -204,7 +204,7 @@ const ProductDetails = () => {
 
               {/* Product Meta */}
               <div className="border-t border-gray-200 pt-4">
-                <div className="grid grid-cols-2 gap-4 text-sm text-gray-600">
+                <div className="grid grid-cols-2 gap-4 text-sm text-text-3-500">
                   <div>
                     <span className="font-medium">SKU:</span> {product.sku}
                   </div>
@@ -217,14 +217,14 @@ const ProductDetails = () => {
 
               {/* Trust Badges */}
               <div className="mt-6 flex flex-wrap gap-4">
-                <div className="flex items-center text-sm text-gray-600">
-                  <FaTruck className="text-purple-600 mr-2" /> Free shipping
+                <div className="flex items-center text-sm text-text-3-500">
+                  <FaTruck className="text-primary-500 mr-2" /> Free shipping
                 </div>
-                <div className="flex items-center text-sm text-gray-600">
-                  <FaUndo className="text-purple-600 mr-2" /> 30-day returns
+                <div className="flex items-center text-sm text-text-3-500">
+                  <FaUndo className="text-primary-500 mr-2" /> 30-day returns
                 </div>
-                <div className="flex items-center text-sm text-gray-600">
-                  <FaShieldAlt className="text-purple-600 mr-2" /> 2-year
+                <div className="flex items-center text-sm text-text-3-500">
+                  <FaShieldAlt className="text-primary-500 mr-2" /> 2-year
                   warranty
                 </div>
               </div>

@@ -89,6 +89,34 @@ app.get('/latest-products', (req, res) => {
   );
 });
 
+// Live search route
+app.get('/get-products/search', (req, res) => {
+  const query = req.query.q;
+  console.log('Query received:', query);
+
+  if (!query) return res.json([]);
+
+  const sql = `
+    SELECT * 
+    FROM products 
+    WHERE TRIM(LOWER(name)) LIKE ?
+    LIMIT 10
+  `;
+
+  // ইউজারের input trim করে lowercase করা
+  const searchTerm = `%${query.trim().toLowerCase()}%`;
+
+  db.query(sql, [searchTerm], (err, results) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Database query failed' });
+    }
+
+    console.log('DB Results:', results); // দেখুন কনসোলে কি আসছে
+    res.json(results);
+  });
+});
+
 // Routes
 app.get('/', (req, res) => {
   res.send('API is running...');

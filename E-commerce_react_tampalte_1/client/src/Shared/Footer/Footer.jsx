@@ -9,10 +9,11 @@ import {
   FaEnvelope,
   FaMapMarkerAlt,
 } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-white pt-12 pb-8">
+    <footer className="bg-sec-500 text-white pt-12 pb-8">
       <div className="max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
@@ -21,32 +22,32 @@ const Footer = () => {
               {' '}
               <img className="h-16" src={Logo} alt="" />
             </div>
-            <p className="text-gray-400 mb-4">
+            <p className="text-text-1-500 mb-4">
               Your trusted online shopping destination for quality products at
               affordable prices.
             </p>
             <div className="flex space-x-4">
               <a
                 href="#"
-                className="text-gray-400 hover:text-purple-400 transition-colors"
+                className="text-text-1-500 hover:text-purple-400 transition-colors"
               >
                 <FaFacebook size={20} />
               </a>
               <a
                 href="#"
-                className="text-gray-400 hover:text-purple-400 transition-colors"
+                className="text-text-1-500 hover:text-purple-400 transition-colors"
               >
                 <FaTwitter size={20} />
               </a>
               <a
                 href="#"
-                className="text-gray-400 hover:text-purple-400 transition-colors"
+                className="text-text-1-500 hover:text-purple-400 transition-colors"
               >
                 <FaInstagram size={20} />
               </a>
               <a
                 href="#"
-                className="text-gray-400 hover:text-purple-400 transition-colors"
+                className="text-text-1-500 hover:text-purple-400 transition-colors"
               >
                 <FaLinkedin size={20} />
               </a>
@@ -60,7 +61,7 @@ const Footer = () => {
               <li>
                 <a
                   href="#"
-                  className="text-gray-400 hover:text-purple-400 transition-colors"
+                  className="text-text-1-500 hover:text-purple-400 transition-colors"
                 >
                   Home
                 </a>
@@ -68,7 +69,7 @@ const Footer = () => {
               <li>
                 <a
                   href="#"
-                  className="text-gray-400 hover:text-purple-400 transition-colors"
+                  className="text-text-1-500 hover:text-purple-400 transition-colors"
                 >
                   Products
                 </a>
@@ -76,7 +77,7 @@ const Footer = () => {
               <li>
                 <a
                   href="#"
-                  className="text-gray-400 hover:text-purple-400 transition-colors"
+                  className="text-text-1-500 hover:text-purple-400 transition-colors"
                 >
                   Categories
                 </a>
@@ -84,7 +85,7 @@ const Footer = () => {
               <li>
                 <a
                   href="#"
-                  className="text-gray-400 hover:text-purple-400 transition-colors"
+                  className="text-text-1-500 hover:text-purple-400 transition-colors"
                 >
                   About Us
                 </a>
@@ -92,7 +93,7 @@ const Footer = () => {
               <li>
                 <a
                   href="#"
-                  className="text-gray-400 hover:text-purple-400 transition-colors"
+                  className="text-text-1-500 hover:text-purple-400 transition-colors"
                 >
                   Contact
                 </a>
@@ -107,7 +108,7 @@ const Footer = () => {
               <li>
                 <a
                   href="#"
-                  className="text-gray-400 hover:text-purple-400 transition-colors"
+                  className="text-text-1-500 hover:text-purple-400 transition-colors"
                 >
                   FAQ
                 </a>
@@ -115,7 +116,7 @@ const Footer = () => {
               <li>
                 <a
                   href="#"
-                  className="text-gray-400 hover:text-purple-400 transition-colors"
+                  className="text-text-1-500 hover:text-purple-400 transition-colors"
                 >
                   Returns & Refunds
                 </a>
@@ -123,7 +124,7 @@ const Footer = () => {
               <li>
                 <a
                   href="#"
-                  className="text-gray-400 hover:text-purple-400 transition-colors"
+                  className="text-text-1-500 hover:text-purple-400 transition-colors"
                 >
                   Shipping Policy
                 </a>
@@ -131,7 +132,7 @@ const Footer = () => {
               <li>
                 <a
                   href="#"
-                  className="text-gray-400 hover:text-purple-400 transition-colors"
+                  className="text-text-1-500 hover:text-purple-400 transition-colors"
                 >
                   Privacy Policy
                 </a>
@@ -139,7 +140,7 @@ const Footer = () => {
               <li>
                 <a
                   href="#"
-                  className="text-gray-400 hover:text-purple-400 transition-colors"
+                  className="text-text-1-500 hover:text-purple-400 transition-colors"
                 >
                   Terms & Conditions
                 </a>
@@ -153,25 +154,33 @@ const Footer = () => {
             <div className="space-y-3">
               <div className="flex items-start">
                 <FaMapMarkerAlt className="mt-1 mr-3 text-purple-400" />
-                <span className="text-gray-400">
-                  Dhaka, Bangladesh
-                </span>
+                <span className="text-text-1-500">Dhaka, Bangladesh</span>
               </div>
               <div className="flex items-center">
                 <FaPhone className="mr-3 text-purple-400" />
-                <span className="text-gray-400">+8801700000000</span>
+                <span className="text-text-1-500">+8801700000000</span>
               </div>
               <div className="flex items-center">
                 <FaEnvelope className="mr-3 text-purple-400" />
-                <span className="text-gray-400">info@onlineshop.com</span>
+                <span className="text-text-1-500">info@onlineshop.com</span>
               </div>
             </div>
           </div>
         </div>
 
         {/* Copyright */}
-        <div className="mt-8 text-center text-gray-500 text-sm">
-          <p>&copy; {new Date().getFullYear()} Online Buzz. All rights reserved.</p>
+        <div className="mt-8 text-center text-text-1-500  text-sm">
+          <p>
+            &copy; {new Date().getFullYear()} Online Buzz. All rights reserved.
+            || Design And Developed By{' '}
+            <Link
+              className="text-blue-400"
+              target="_blank"
+              to={'https://creativesoftware.com.bd/'}
+            >
+              Creative Software
+            </Link>
+          </p>
         </div>
       </div>
     </footer>
