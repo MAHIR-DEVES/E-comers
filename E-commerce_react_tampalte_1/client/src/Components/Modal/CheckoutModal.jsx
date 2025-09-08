@@ -7,9 +7,11 @@ import {
   FaTrash,
 } from 'react-icons/fa';
 import { useCart } from '../../Context/CartContext';
+import { useNavigate } from 'react-router-dom';
 
 const CheckoutModal = ({ isOpen, onClose, total, cartItems }) => {
   const { removeFromCart } = useCart();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     mobile: '',
@@ -34,6 +36,13 @@ const CheckoutModal = ({ isOpen, onClose, total, cartItems }) => {
     console.log('Form submitted:', formData);
     alert('আপনার অর্ডারটি সফলভাবে গ্রহণ করা হয়েছে!');
     onClose();
+  };
+
+  const handleOrder = () => {
+    // মডেল বন্ধ
+    onClose();
+    // Checkout page এ নিয়ে যাওয়া
+    navigate('/checkout-order');
   };
 
   return (
@@ -218,6 +227,7 @@ const CheckoutModal = ({ isOpen, onClose, total, cartItems }) => {
               বাতিল
             </button>
             <button
+              onClick={handleOrder}
               type="submit"
               className="flex-1 bg-primary-500 hover:bg-product-btn-hover-1-500 text-white py-2.5 rounded-md font-medium transition-colors"
             >

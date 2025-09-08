@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaTimes, FaPhone, FaMapMarkerAlt, FaTruck } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const OrderModal = ({ isOpen, onClose, product }) => {
   const [formData, setFormData] = useState({
@@ -64,7 +65,7 @@ const OrderModal = ({ isOpen, onClose, product }) => {
         <form onSubmit={handleSubmit} className="p-5">
           {/* Customer Info */}
           <div className="mb-6">
-            <h3 className="text-lg font-medium text-text-2-500 mb-3 flex items-center">
+            <h3 className="text-sm font-medium text-text-2-500 mb-3 flex items-center">
               <FaMapMarkerAlt className="mr-2 text-primary-500" />
               ডেলিভারি তথ্য
             </h3>
@@ -163,11 +164,12 @@ const OrderModal = ({ isOpen, onClose, product }) => {
             </div>
             <div className="flex justify-between font-bold text-lg border-t pt-2">
               <span>মোট :</span>
-              <span className="text-price-text-500">৳ {totalPrice}</span>
+              <span className="text-price-text-500">
+                ৳ {totalPrice.toFixed(2)}
+              </span>
             </div>
           </div>
 
-          {/* Action Buttons */}
           <div className="flex gap-3">
             <button
               type="button"
@@ -176,12 +178,24 @@ const OrderModal = ({ isOpen, onClose, product }) => {
             >
               বাতিল
             </button>
-            <button
-              type="submit"
-              className="flex-1 bg-primary-500 hover:bg-product-btn-hover-1-500 text-white py-2 rounded-md"
+
+            <Link
+              to="/single-order"
+              state={{
+                product: product,
+                customer: {
+                  name: formData.name,
+                  mobile: formData.mobile,
+                  address: formData.address,
+                  deliveryOption: formData.deliveryOption,
+                },
+                totalPrice: totalPrice,
+                deliveryCharge: deliveryCharge,
+              }}
+              className="flex-1 bg-primary-500 hover:bg-product-btn-hover-1-500 text-white py-2 rounded-md text-center inline-block"
             >
               অর্ডার করুন
-            </button>
+            </Link>
           </div>
         </form>
       </div>

@@ -9,7 +9,7 @@ import {
 } from 'react-icons/fa';
 import CheckoutModal from '../Modal/CheckoutModal';
 
-const CartDropdown = () => {
+const CartDropdown = ({ setShowCart }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { cartItems, removeFromCart } = useCart();
 

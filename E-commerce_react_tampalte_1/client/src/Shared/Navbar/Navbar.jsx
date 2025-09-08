@@ -254,7 +254,7 @@ const Navbar = () => {
                   </span>
                 </button>
 
-                {showCart && <CartDropdown />}
+                {showCart && <CartDropdown setShowCart={setShowCart} />}
               </div>
             </div>
 

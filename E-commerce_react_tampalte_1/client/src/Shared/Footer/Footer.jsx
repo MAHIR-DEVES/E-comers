@@ -8,6 +8,7 @@ import {
   FaPhone,
   FaEnvelope,
   FaMapMarkerAlt,
+  FaGooglePlay,
 } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
@@ -19,7 +20,6 @@ const Footer = () => {
           {/* Company Info */}
           <div className="lg:col-span-1">
             <div className="">
-              {' '}
               <img className="h-16" src={Logo} alt="" />
             </div>
             <p className="text-text-1-500 mb-4">
@@ -50,6 +50,15 @@ const Footer = () => {
                 className="text-text-1-500 hover:text-purple-400 transition-colors"
               >
                 <FaLinkedin size={20} />
+              </a>
+              {/* Google Play Store */}
+              <a
+                href="https://play.google.com/store" // তোমার অ্যাপের লিংক দিলে এখানে বসাও
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-text-1-500 hover:text-purple-400 transition-colors"
+              >
+                <FaGooglePlay size={20} />
               </a>
             </div>
           </div>
