@@ -9,7 +9,7 @@ import {
 } from 'react-icons/fa';
 import CheckoutModal from '../Modal/CheckoutModal';
 
-const CartDropdown = ({ setShowCart }) => {
+const CartDropdown = ({ setShowCart, openCheckoutModal }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { cartItems, removeFromCart } = useCart();
 
@@ -93,12 +93,16 @@ const CartDropdown = ({ setShowCart }) => {
             </span>
           </div>
           <button
-            onClick={() => setIsModalOpen(true)}
+            onClick={() => {
+              setShowCart(false); // Cart Dropdown বন্ধ হবে
+              openCheckoutModal(); // Modal ওপেন হবে
+            }}
             className="w-full bg-gradient-to-r from-[#f94144] to-purple-600 hover:from-[#dd2d4a] hover:to-purple-700 text-white py-2.5 px-4 rounded-md font-medium flex items-center justify-center transition-all duration-200 shadow-md hover:shadow-lg"
           >
             Proceed to Checkout
             <FaArrowRight className="ml-2" size={14} />
           </button>
+
           <p className="text-xs text-center text-gray-500 mt-2">
             Free shipping on orders over $50
           </p>

@@ -6,7 +6,6 @@ import {
   FaMapMarkerAlt,
   FaTruck,
   FaHeadset,
-  FaMoneyBillWave,
   FaShoppingBag,
 } from 'react-icons/fa';
 import { useLocation } from 'react-router-dom';
@@ -19,11 +18,11 @@ const SingleOrder = () => {
   if (!product) return <p>কোনও অর্ডার পাওয়া যায়নি।</p>;
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4 font-sans">
+    <div className="min-h-screen bg-purple-50  py-8 px-4 font-sans">
       <div className="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-lg">
         {/* Header */}
         <div className="text-center mb-10">
-          <h1 className="text-3xl font-bold text-green-700 mb-3">
+          <h1 className="text-3xl font-bold text-sec-500 mb-3">
             Thank you for your order!
           </h1>
           <p className="text-gray-600 mb-6">
@@ -32,21 +31,19 @@ const SingleOrder = () => {
 
           <div className="flex justify-center items-center space-x-4 md:space-x-8">
             <div className="flex flex-col items-center">
-              <div className="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center mb-2 shadow-sm">
-                <FaBox className="text-green-600 text-xl" />
+              <div className="w-14 h-14 bg-product-btn-hover-500   rounded-full flex items-center justify-center mb-2 shadow-sm">
+                <FaBox className="text-sec-500 text-xl" />
               </div>
-              <span className="text-sm font-medium text-green-700">
-                Ordered
-              </span>
+              <span className="text-sm font-medium text-sec-500">Ordered</span>
             </div>
 
-            <div className="h-1 w-12 bg-green-300"></div>
+            <div className="h-1 w-12 bg-product-btn-hover-500 "></div>
 
             <div className="flex flex-col items-center">
-              <div className="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center mb-2 shadow-sm">
+              <div className="w-14 h-14 bg-product-btn-hover-500 rounded-full flex items-center justify-center mb-2 shadow-sm">
                 <FaShippingFast className="text-price-text-500 text-xl" />
               </div>
-              <span className="text-sm font-medium text-green-700">
+              <span className="text-sm font-medium text-sec-500">
                 Processing
               </span>
             </div>
@@ -89,7 +86,7 @@ const SingleOrder = () => {
             <div className="flex items-baseline">
               <span className="text-gray-700 font-medium mr-2">Total:</span>
               <span className="text-2xl font-bold text-price-text-500">
-                ${totalPrice}
+                ৳ {totalPrice}
               </span>
             </div>
           </div>
@@ -99,8 +96,8 @@ const SingleOrder = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           {/* Customer Information */}
           <div className="bg-gray-50 p-5 rounded-lg border border-gray-100">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
-              <FaMapMarkerAlt className="text-green-600 mr-2" />
+            <h3 className="text-lg font-semibold text-text-2 mb-4 flex items-center">
+              <FaMapMarkerAlt className="text-sec-500 mr-2" />
               Customer Information
             </h3>
             <div className="space-y-3">
@@ -122,8 +119,8 @@ const SingleOrder = () => {
           </div>
           {/* Order Information */}
           <div className="bg-gray-50 p-5 rounded-lg border border-gray-100">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
-              <FaShoppingBag className="text-green-600 mr-2" />
+            <h3 className="text-lg font-semibold text-text-2 mb-4 flex items-center">
+              <FaShoppingBag className="text-sec-500 mr-2" />
               Order Information
             </h3>
             <div className="space-y-3">
@@ -145,7 +142,7 @@ const SingleOrder = () => {
                 <span className="text-gray-600 font-medium">
                   Delivery Charge:
                 </span>
-                <span className="text-gray-800">${deliveryCharge}</span>
+                <span className="text-gray-800">৳ {deliveryCharge}</span>
               </div>
             </div>
           </div>
@@ -172,7 +169,7 @@ const SingleOrder = () => {
               </div>
               <div className="text-right">
                 <p className="font-semibold text-gray-800 text-xl">
-                  ${product.price}
+                  ৳ {product.price}
                 </p>
               </div>
             </div>
@@ -187,18 +184,18 @@ const SingleOrder = () => {
           <div className="space-y-3">
             <div className="flex justify-between">
               <span className="text-gray-600">Subtotal</span>
-              <span className="text-gray-800">${product.price}</span>
+              <span className="text-gray-800">৳ {product.price}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-gray-600">Delivery charge</span>
-              <span className="text-gray-800">${deliveryCharge}</span>
+              <span className="text-gray-800">৳ {deliveryCharge}</span>
             </div>
 
             <hr className="my-4 border-gray-300" />
             <div className="flex justify-between text-lg font-semibold">
               <span className="text-gray-800">Total Amount</span>
               <span className="text-price-text-500">
-                ${Number(product.price) + Number(deliveryCharge)}
+                ৳ {Number(product.price) + Number(deliveryCharge)}
               </span>
             </div>
           </div>
@@ -206,11 +203,11 @@ const SingleOrder = () => {
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 mt-8">
-          <button className="flex-1 bg-sec-500 hover:bg-product-btn-hover-1-500 text-white py-4 px-6 rounded-lg flex items-center justify-center font-medium shadow-md transition-colors">
+          <button className="flex-1 bg-primary-500 hover:bg-product-btn-hover-1-500 text-white py-4 px-6 rounded-lg flex items-center justify-center font-medium shadow-md transition-colors">
             <FaTruck className="mr-3 text-lg" />
             Track Your Order
           </button>
-          <button className="flex-1 bg-white border border-gray-300 hover:bg-gray-50 text-gray-800 py-4 px-6 rounded-lg flex items-center justify-center font-medium shadow-sm transition-colors">
+          <button className="flex-1 bg-white border border-gray-300 hover:bg-product-btn-hover-500  text-gray-800 py-4 px-6 rounded-lg flex items-center justify-center font-medium shadow-sm transition-colors">
             <FaHeadset className="mr-3 text-lg" />
             Contact Support
           </button>

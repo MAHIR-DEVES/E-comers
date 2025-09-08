@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { FaTimes, FaPhone, FaMapMarkerAlt, FaTruck } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const OrderModal = ({ isOpen, onClose, product }) => {
+  const navigate = useNavigate(); // redirect করার জন্য
   const [formData, setFormData] = useState({
     name: '',
     mobile: '',
@@ -14,26 +16,40 @@ const OrderModal = ({ isOpen, onClose, product }) => {
 
   const handleInputChange = e => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = e => {
     e.preventDefault();
+
+    if (!formData.name || !formData.mobile || !formData.address) {
+      return alert('সব ইনপুট ফিল্ড পূরণ করুন!');
+    }
+
     const deliveryCharge =
       formData.deliveryOption === 'inside_dhaka' ? 60 : 120;
     const totalPrice = Number(product.price) + deliveryCharge;
 
     console.log('Order submitted:', { ...formData, product, totalPrice });
-    alert(
-      `✅ আপনার অর্ডারটি সফলভাবে গ্রহণ করা হয়েছে! মোট বিল: ৳${totalPrice}`
-    );
+
+    toast.success(`অর্ডার সফল! মোট:  ৳${totalPrice}`, {
+      position: 'top-right',
+      autoClose: 3000,
+    });
+
+    // ফর্ম সাবমিটের পরে redirect
+    navigate('/single-order', {
+      state: {
+        product,
+        customer: formData,
+        totalPrice,
+        deliveryCharge,
+      },
+    });
+
     onClose();
   };
 
-  // Calculate delivery charge & total price for UI
   const deliveryCharge = formData.deliveryOption === 'inside_dhaka' ? 60 : 120;
   const totalPrice = Number(product.price) + deliveryCharge;
 
@@ -89,7 +105,7 @@ const OrderModal = ({ isOpen, onClose, product }) => {
                   <FaPhone className="mr-1 text-primary-500" /> মোবাইল *
                 </label>
                 <input
-                  type="tel"
+                  type="number"
                   name="mobile"
                   value={formData.mobile}
                   onChange={handleInputChange}
@@ -179,23 +195,13 @@ const OrderModal = ({ isOpen, onClose, product }) => {
               বাতিল
             </button>
 
-            <Link
-              to="/single-order"
-              state={{
-                product: product,
-                customer: {
-                  name: formData.name,
-                  mobile: formData.mobile,
-                  address: formData.address,
-                  deliveryOption: formData.deliveryOption,
-                },
-                totalPrice: totalPrice,
-                deliveryCharge: deliveryCharge,
-              }}
-              className="flex-1 bg-primary-500 hover:bg-product-btn-hover-1-500 text-white py-2 rounded-md text-center inline-block"
+            {/* Submit Button */}
+            <button
+              type="submit"
+              className="flex-1 bg-primary-500 hover:bg-product-btn-hover-1-500 text-white py-2 rounded-md"
             >
               অর্ডার করুন
-            </Link>
+            </button>
           </div>
         </form>
       </div>

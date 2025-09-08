@@ -8,6 +8,7 @@ import {
 } from 'react-icons/fa';
 import { useCart } from '../../Context/CartContext';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const CheckoutModal = ({ isOpen, onClose, total, cartItems }) => {
   const { removeFromCart } = useCart();
@@ -30,19 +31,35 @@ const CheckoutModal = ({ isOpen, onClose, total, cartItems }) => {
     });
   };
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
-    alert('আপনার অর্ডারটি সফলভাবে গ্রহণ করা হয়েছে!');
-    onClose();
-  };
+  const handleOrder = e => {
+    e.preventDefault(); // ফর্ম সাবমিট রোধ
 
-  const handleOrder = () => {
-    // মডেল বন্ধ
+    const { name, mobile, address, deliveryOption } = formData;
+
+    // চেক করা যদি কোনো ফাঁকা থাকে
+    if (!name.trim() || !mobile.trim() || !address.trim() || !deliveryOption) {
+      alert('দয়া করে সব ইনপুট ফিল্ড পূরণ করুন।');
+      return; // এখানে ফাংশন থেমে যাবে
+    }
+
+    // সব ঠিক থাকলে অর্ডার প্রক্রিয়া
+    console.log('অর্ডার ডাটা:', formData, 'Cart:', cartItems, 'Total:', total);
+
+    const orderData = {
+      customer: formData, // নাম, মোবাইল, ঠিকানা, deliveryOption
+      cartItems, // কার্টের সব আইটেম
+      total: total + (deliveryOption === 'inside_dhaka' ? 60 : 120), // মোট
+      deliveryCharge: deliveryOption === 'inside_dhaka' ? 60 : 120,
+    };
+    toast.success(`অর্ডার সফল! মোট:  ৳${orderData.total.toFixed(2)}`, {
+      position: 'top-right',
+      autoClose: 3000,
+    });
+    // মডাল বন্ধ করা
     onClose();
+
     // Checkout page এ নিয়ে যাওয়া
-    navigate('/checkout-order');
+    navigate('/checkout-order', { state: orderData });
   };
 
   return (
@@ -97,7 +114,7 @@ const CheckoutModal = ({ isOpen, onClose, total, cartItems }) => {
             </div>
           ))}
         </div>
-        <form onSubmit={handleSubmit} className="p-5">
+        <form onSubmit={handleOrder} className="p-5">
           {/* Customer Information */}
           <div className="mb-6">
             <h3 className="text-lg font-medium text-text-2-500 mb-3 flex items-center">

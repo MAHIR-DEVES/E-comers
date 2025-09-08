@@ -5,11 +5,14 @@ import { Link } from 'react-router-dom';
 import { useCart } from '../../Context/CartContext';
 import CartDropdown from '../../Components/CartDropdown/CartDropdown';
 import axios from 'axios';
+import CheckoutModal from '../../Components/Modal/CheckoutModal';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [showCart, setShowCart] = useState(false);
+  const [isCheckoutModalOpen, setIsCheckoutModalOpen] = useState(false);
+
   const { cartItems } = useCart();
 
   const [searchResults, setSearchResults] = useState([]);
@@ -59,6 +62,15 @@ const Navbar = () => {
     },
     { name: 'Home', href: '#' },
   ];
+
+  // calculate
+  const calculateCartTotal = items =>
+    items.reduce(
+      (total, item) =>
+        total +
+        parseFloat(item.discountPrice || item.price) * (item.quantity || 1),
+      0
+    );
 
   return (
     <nav className="bg-white shadow-lg sticky top-0 z-50">
@@ -254,8 +266,19 @@ const Navbar = () => {
                   </span>
                 </button>
 
-                {showCart && <CartDropdown setShowCart={setShowCart} />}
+                {showCart && (
+                  <CartDropdown
+                    setShowCart={setShowCart}
+                    openCheckoutModal={() => setIsCheckoutModalOpen(true)}
+                  />
+                )}
               </div>
+              <CheckoutModal
+                isOpen={isCheckoutModalOpen}
+                onClose={() => setIsCheckoutModalOpen(false)}
+                total={calculateCartTotal(cartItems)}
+                cartItems={cartItems}
+              />
             </div>
 
             {/* Mobile menu button */}
