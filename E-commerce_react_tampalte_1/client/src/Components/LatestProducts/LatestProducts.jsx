@@ -12,7 +12,7 @@ const LatestProducts = () => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get(
-          'http://localhost:3000/latest-products'
+          'https://online-buzz.vercel.app/latest-products'
         );
         setProducts(response.data); // set state with API data
       } catch (error) {

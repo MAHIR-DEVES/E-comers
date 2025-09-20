@@ -42,7 +42,7 @@ const Navbar = () => {
 
     try {
       const res = await axios.get(
-        `http://localhost:3000/get-products/search?q=${query}`
+        `https://online-buzz.vercel.app/get-products/search?q=${query}`
       );
       setSearchResults(res.data);
     } catch (err) {

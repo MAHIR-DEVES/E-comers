@@ -6,7 +6,6 @@ import {
   FaMapMarkerAlt,
   FaTruck,
   FaHeadset,
-  FaMoneyBillWave,
   FaShoppingBag,
 } from 'react-icons/fa';
 import { useLocation } from 'react-router-dom';
@@ -18,6 +17,22 @@ const CheckoutOrder = () => {
   if (!customer || !cartItems) {
     return <p>কোনো অর্ডার ডাটা পাওয়া যায়নি।</p>;
   }
+
+  // Proper decimal handling
+  const subtotal = parseFloat((total - deliveryCharge).toFixed(2));
+  const delivery = parseFloat(deliveryCharge.toFixed(2));
+  const finalTotal = parseFloat(total.toFixed(2));
+
+  // Grand total from cartItems
+  const grandTotal = parseFloat(
+    cartItems
+      .reduce(
+        (sum, item) =>
+          sum + (item.discountPrice || item.price) * (item.quantity || 1),
+        0
+      )
+      .toFixed(2)
+  );
 
   return (
     <div className="min-h-screen bg-purple-50 py-8 px-4 font-sans">
@@ -43,7 +58,7 @@ const CheckoutOrder = () => {
             <div className="h-1 w-12 bg-primary-500"></div>
 
             <div className="flex flex-col items-center">
-              <div className="w-14 h-14 bg-product-btn-hover-500  rounded-full flex items-center justify-center mb-2 shadow-sm">
+              <div className="w-14 h-14 bg-product-btn-hover-500 rounded-full flex items-center justify-center mb-2 shadow-sm">
                 <FaShippingFast className="text-price-text-500 text-xl" />
               </div>
               <span className="text-sm font-medium text-price-sec-500">
@@ -90,7 +105,7 @@ const CheckoutOrder = () => {
             <div className="flex items-baseline">
               <span className="text-text-2-500 font-medium mr-2">Total:</span>
               <span className="text-2xl font-bold text-price-text-500">
-                ৳ {total.toFixed(2)}
+                ৳ {finalTotal.toFixed(2)}
               </span>
             </div>
           </div>
@@ -150,11 +165,14 @@ const CheckoutOrder = () => {
                 <span className="text-text-3-500 font-medium">
                   Delivery Charge:
                 </span>
-                <span className="text-price-text-500">৳ {deliveryCharge}</span>
+                <span className="text-price-text-500">
+                  ৳ {delivery.toFixed(2)}
+                </span>
               </div>
             </div>
           </div>
         </div>
+
         {/* Products Table */}
         <div className="mb-8">
           <h3 className="text-lg font-semibold text-text-2-500 mb-4 border-b pb-2">
@@ -184,8 +202,11 @@ const CheckoutOrder = () => {
               </thead>
               <tbody>
                 {cartItems.map(item => {
-                  const itemTotal =
-                    (item.discountPrice || item.price) * (item.quantity || 1);
+                  const itemTotal = parseFloat(
+                    (
+                      (item.discountPrice || item.price) * (item.quantity || 1)
+                    ).toFixed(2)
+                  );
                   return (
                     <tr
                       key={item.id}
@@ -200,10 +221,12 @@ const CheckoutOrder = () => {
                       </td>
                       <td className="py-3 px-4">{item.name}</td>
                       <td className="py-3 px-4">
-                        ৳ {item.discountPrice || item.price}
+                        ৳ {(item.discountPrice || item.price).toFixed(2)}
                       </td>
                       <td className="py-3 px-4">{item.quantity || 1}</td>
-                      <td className="py-3 px-4 font-semibold">৳ {itemTotal}</td>
+                      <td className="py-3 px-4 font-semibold">
+                        ৳ {itemTotal.toFixed(2)}
+                      </td>
                     </tr>
                   );
                 })}
@@ -213,16 +236,7 @@ const CheckoutOrder = () => {
                   <td colSpan="4" className="py-3 px-4 text-right">
                     Grand Total
                   </td>
-                  <td className="py-3 px-4">
-                    ৳{' '}
-                    {cartItems.reduce(
-                      (sum, item) =>
-                        sum +
-                        (item.discountPrice || item.price) *
-                          (item.quantity || 1),
-                      0
-                    )}
-                  </td>
+                  <td className="py-3 px-4">৳ {grandTotal.toFixed(2)}</td>
                 </tr>
               </tbody>
             </table>
@@ -237,18 +251,16 @@ const CheckoutOrder = () => {
           <div className="space-y-3">
             <div className="flex justify-between">
               <span className="text-text-3-500">Subtotal</span>
-              <span className="text-text-2-500">
-                ৳ {total - deliveryCharge}
-              </span>
+              <span className="text-text-2-500">৳ {subtotal.toFixed(2)}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-text-3-500">Delivery Charge</span>
-              <span className="text-text-2-500">৳ {deliveryCharge}</span>
+              <span className="text-text-2-500">৳ {delivery.toFixed(2)}</span>
             </div>
             <hr className="my-4 border-gray-300" />
             <div className="flex justify-between text-lg font-semibold">
               <span className="text-text-2-500">Total Amount</span>
-              <span className="text-green-700">৳ {total}</span>
+              <span className="text-green-700">৳ {finalTotal.toFixed(2)}</span>
             </div>
           </div>
         </div>

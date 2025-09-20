@@ -32,33 +32,28 @@ const CheckoutModal = ({ isOpen, onClose, total, cartItems }) => {
   };
 
   const handleOrder = e => {
-    e.preventDefault(); // ফর্ম সাবমিট রোধ
-
+    e.preventDefault();
     const { name, mobile, address, deliveryOption } = formData;
 
-    // চেক করা যদি কোনো ফাঁকা থাকে
-    if (!name.trim() || !mobile.trim() || !address.trim() || !deliveryOption) {
-      alert('দয়া করে সব ইনপুট ফিল্ড পূরণ করুন।');
-      return; // এখানে ফাংশন থেমে যাবে
+    if (!name.trim() || !mobile.trim() || !address.trim()) {
+      alert('সব ফিল্ড পূরণ করুন।');
+      return;
     }
 
-    // সব ঠিক থাকলে অর্ডার প্রক্রিয়া
-    console.log('অর্ডার ডাটা:', formData, 'Cart:', cartItems, 'Total:', total);
+    if (!/^\d{11}$/.test(mobile)) {
+      toast.warning('মোবাইল নম্বর ১১ ডিজিট হতে হবে।');
+      return;
+    }
 
     const orderData = {
-      customer: formData, // নাম, মোবাইল, ঠিকানা, deliveryOption
-      cartItems, // কার্টের সব আইটেম
-      total: total + (deliveryOption === 'inside_dhaka' ? 60 : 120), // মোট
+      customer: formData,
+      cartItems,
+      total: total + (deliveryOption === 'inside_dhaka' ? 60 : 120),
       deliveryCharge: deliveryOption === 'inside_dhaka' ? 60 : 120,
     };
-    toast.success(`অর্ডার সফল! মোট:  ৳${orderData.total.toFixed(2)}`, {
-      position: 'top-right',
-      autoClose: 3000,
-    });
-    // মডাল বন্ধ করা
-    onClose();
 
-    // Checkout page এ নিয়ে যাওয়া
+    toast.success(`অর্ডার সফল! মোট: ৳${orderData.total.toFixed(2)}`);
+    onClose();
     navigate('/checkout-order', { state: orderData });
   };
 
@@ -101,6 +96,16 @@ const CheckoutModal = ({ isOpen, onClose, total, cartItems }) => {
                   <span className="text-sm font-bold text-price-text-500">
                     ${item.discountPrice || item.price}
                   </span>
+
+                  <span>
+                    <span className="mr-5"> x {item.quantity || 1}</span>৳
+                    <span className="ml-0.5">
+                      {(
+                        (item.discountPrice || item.price) *
+                        (item.quantity || 1)
+                      ).toFixed(2)}
+                    </span>
+                  </span>
                 </div>
               </div>
 
@@ -117,7 +122,7 @@ const CheckoutModal = ({ isOpen, onClose, total, cartItems }) => {
         <form onSubmit={handleOrder} className="p-5">
           {/* Customer Information */}
           <div className="mb-6">
-            <h3 className="text-lg font-medium text-text-2-500 mb-3 flex items-center">
+            <h3 className="text-sm font-medium text-text-2-500 mb-3 flex items-center">
               <FaMapMarkerAlt className="mr-2 text-primary-500" />
               ডেলিভারি তথ্য
             </h3>
@@ -150,6 +155,7 @@ const CheckoutModal = ({ isOpen, onClose, total, cartItems }) => {
                   className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
                   required
                   placeholder="01XXXXXXXXX"
+                  maxLength={11}
                 />
               </div>
             </div>
@@ -158,7 +164,7 @@ const CheckoutModal = ({ isOpen, onClose, total, cartItems }) => {
           {/* Delivery Information */}
           <div className="mb-6">
             <div className="mb-4">
-              <label className="block text-sm font-medium text-text-2-500 mb-1">
+              <label className="block text-sm font-medium text-text-2-500 bg-white mb-1">
                 সম্পূর্ণ ঠিকানা *
               </label>
               <textarea
@@ -244,7 +250,6 @@ const CheckoutModal = ({ isOpen, onClose, total, cartItems }) => {
               বাতিল
             </button>
             <button
-              onClick={handleOrder}
               type="submit"
               className="flex-1 bg-primary-500 hover:bg-product-btn-hover-1-500 text-white py-2.5 rounded-md font-medium transition-colors"
             >

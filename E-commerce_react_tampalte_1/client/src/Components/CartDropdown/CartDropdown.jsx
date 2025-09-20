@@ -1,4 +1,3 @@
-// src/Components/CartDropdown/CartDropdown.jsx
 import React, { useState } from 'react';
 import { useCart } from '../../Context/CartContext';
 import {
@@ -11,7 +10,7 @@ import CheckoutModal from '../Modal/CheckoutModal';
 
 const CartDropdown = ({ setShowCart, openCheckoutModal }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { cartItems, removeFromCart } = useCart();
+  const { cartItems, removeFromCart, updateQuantity } = useCart();
 
   const calculateTotal = () => {
     return cartItems.reduce((total, item) => {
@@ -64,20 +63,40 @@ const CartDropdown = ({ setShowCart, openCheckoutModal }) => {
                   {item.name}
                 </h5>
                 <p className="text-xs text-gray-500">{item.brand}</p>
+
+                {/* Quantity control */}
                 <div className="flex items-center justify-between mt-1">
                   <span className="text-sm font-bold text-purple-700">
-                    ${item.discountPrice || item.price}
+                    ৳ {item.discountPrice || item.price}
                   </span>
+                  <div className="flex items-center space-x-2">
+                    <button
+                      onClick={() =>
+                        updateQuantity(item.id, (item.quantity || 1) - 1)
+                      }
+                      className="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300 text-sm"
+                    >
+                      -
+                    </button>
+                    <span className="px-2">{item.quantity || 1}</span>
+                    <button
+                      onClick={() =>
+                        updateQuantity(item.id, (item.quantity || 1) + 1)
+                      }
+                      className="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300 text-sm"
+                    >
+                      +
+                    </button>
+                    <button
+                      onClick={() => removeFromCart(item.id)}
+                      className="ml-2 p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-full transition-colors duration-150"
+                      aria-label="Remove item"
+                    >
+                      <FaTrash size={14} />
+                    </button>
+                  </div>
                 </div>
               </div>
-
-              <button
-                onClick={() => removeFromCart(item.id)}
-                className="ml-2 p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-full transition-colors duration-150"
-                aria-label="Remove item"
-              >
-                <FaTrash size={14} />
-              </button>
             </div>
           ))}
         </div>
@@ -89,13 +108,13 @@ const CartDropdown = ({ setShowCart, openCheckoutModal }) => {
           <div className="flex justify-between items-center mb-3">
             <span className="text-gray-600">Subtotal:</span>
             <span className="text-lg font-bold text-purple-700">
-              ${calculateTotal().toFixed(2)}
+              ৳ {calculateTotal().toFixed(2)}
             </span>
           </div>
           <button
             onClick={() => {
-              setShowCart(false); // Cart Dropdown বন্ধ হবে
-              openCheckoutModal(); // Modal ওপেন হবে
+              setShowCart(false);
+              openCheckoutModal();
             }}
             className="w-full bg-gradient-to-r from-[#f94144] to-purple-600 hover:from-[#dd2d4a] hover:to-purple-700 text-white py-2.5 px-4 rounded-md font-medium flex items-center justify-center transition-all duration-200 shadow-md hover:shadow-lg"
           >
@@ -104,10 +123,11 @@ const CartDropdown = ({ setShowCart, openCheckoutModal }) => {
           </button>
 
           <p className="text-xs text-center text-gray-500 mt-2">
-            Free shipping on orders over $50
+            Free shipping on orders over৳ 50
           </p>
         </div>
       )}
+
       {/* Modal */}
       <CheckoutModal
         isOpen={isModalOpen}

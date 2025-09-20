@@ -38,15 +38,15 @@ const ProductCard = ({ product }) => {
               {product.discountPrice ? (
                 <>
                   <span className="text-2xl font-bold text-price-text-500">
-                    ${product.discountPrice}
+                    ৳ {product.discountPrice}
                   </span>
                   <span className="text-lg text-text-3-500 line-through ml-2">
-                    ${product.price}
+                    ৳ {product.price}
                   </span>
                 </>
               ) : (
                 <span className="text-2xl font-bold text-purple-700">
-                  ${product.price}
+                  ৳ {product.price}
                 </span>
               )}
             </div>

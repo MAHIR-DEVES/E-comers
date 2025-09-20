@@ -10,7 +10,9 @@ const Category = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/categories');
+        const response = await axios.get(
+          'https://online-buzz.vercel.app/categories'
+        );
         setCategory(response.data); // set state with API data
       } catch (error) {
         console.error('Error fetching latest products:', error);

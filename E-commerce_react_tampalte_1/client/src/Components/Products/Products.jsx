@@ -9,7 +9,9 @@ const Products = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/products');
+        const response = await axios.get(
+          'https://online-buzz.vercel.app/products'
+        );
         setProducts(response.data); // set state with API data
       } catch (error) {
         console.error('Error fetching latest products:', error);

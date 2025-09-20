@@ -27,7 +27,7 @@ const ProductDetails = () => {
     const fetchProduct = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/products/${id}`
+          `https://online-buzz.vercel.app/products/${id}`
         );
         setProduct(response.data);
       } catch (err) {
@@ -124,18 +124,18 @@ const ProductDetails = () => {
                 {product.discountPrice ? (
                   <div className="flex items-center">
                     <span className="text-3xl font-bold text-price-text-500">
-                      ${product.discountPrice}
+                      ৳ {product.discountPrice}
                     </span>
                     <span className="text-xl text-text-3-500 line-through ml-3">
-                      ${product.price}
+                      ৳ {product.price}
                     </span>
                     <span className="ml-4 bg-product-btn-hover-500 text-green-600 px-2 py-1 rounded-md text-sm font-medium">
-                      Save ${(product.price - product.discountPrice).toFixed(2)}
+                      Save৳ {(product.price - product.discountPrice).toFixed(2)}
                     </span>
                   </div>
                 ) : (
                   <span className="text-3xl font-bold text-price-text-500">
-                    ${product.price}
+                    ৳ {product.price}
                   </span>
                 )}
               </div>
