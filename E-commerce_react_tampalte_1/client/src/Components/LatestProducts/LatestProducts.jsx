@@ -11,10 +11,10 @@ const LatestProducts = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(
-          'https://online-buzz.vercel.app/latest-products'
-        );
-        setProducts(response.data); // set state with API data
+        const response = await axios.get(`
+          ${import.meta.env.VITE_API_URL}/api/products/latest-product`);
+
+        setProducts(response.data.result.data);
       } catch (error) {
         console.error('Error fetching latest products:', error);
       }
@@ -23,7 +23,7 @@ const LatestProducts = () => {
     fetchProducts();
   }, []);
 
-  // Update visible items based on screen size
+  // Responsive visible items
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 640) {
@@ -68,7 +68,7 @@ const LatestProducts = () => {
   };
 
   return (
-    <div className=" py-10 ">
+    <div className="py-10">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-8">
@@ -127,7 +127,7 @@ const LatestProducts = () => {
                   className="flex-shrink-0"
                   style={{ flex: `0 0 ${100 / visibleItems}%` }}
                 >
-                  <ProductCard product={product}></ProductCard>
+                  <ProductCard product={product} />
                 </div>
               ))}
             </div>

@@ -9,13 +9,31 @@ import {
   FaShoppingBag,
 } from 'react-icons/fa';
 import { useLocation } from 'react-router-dom';
+import { format, formatDistanceToNow } from 'date-fns';
 
 const SingleOrder = () => {
   const location = useLocation();
-  const { product, customer, totalPrice, deliveryCharge } =
+  const { product, customer, totalPrice, deliveryCharge, orderDate } =
     location.state || {};
 
   if (!product) return <p>কোনও অর্ডার পাওয়া যায়নি।</p>;
+
+  // date formatting
+  const formattedDate = orderDate
+    ? format(new Date(orderDate), 'MMMM d, yyyy')
+    : '';
+
+  // "just now"
+  let timeAgo = '';
+  if (orderDate) {
+    const diffInSeconds = Math.floor((Date.now() - new Date(orderDate)) / 1000);
+
+    if (diffInSeconds < 60) {
+      timeAgo = 'just now'; // 👈 less than a minute
+    } else {
+      timeAgo = formatDistanceToNow(new Date(orderDate), { addSuffix: true });
+    }
+  }
 
   return (
     <div className="min-h-screen bg-purple-50  py-8 px-4 font-sans">
@@ -79,7 +97,7 @@ const SingleOrder = () => {
               Order #196685
             </h2>
             <p className="text-gray-600 text-sm">
-              Placed on September 8, 2025 (5 seconds ago)
+              Placed on {formattedDate} ({timeAgo})
             </p>
           </div>
           <div className="mt-4 md:mt-0">
@@ -157,19 +175,30 @@ const SingleOrder = () => {
             <div className="flex items-center space-x-4">
               <div className="w-20 h-20 bg-gray-200 rounded-lg flex items-center justify-center shadow-sm">
                 <span className="text-gray-500 text-sm">
-                  <img src={product.image} alt="" />
+                  <img
+                    src={
+                      product.image
+                        ? `${import.meta.env.VITE_API_URL}/product/${
+                            product.image
+                          }`
+                        : '/placeholder.png'
+                    }
+                    alt={product.title}
+                  />
                 </span>
               </div>
               <div className="flex-1">
                 <h4 className="font-medium text-gray-800 text-lg">
-                  {product.name}
+                  {product.title}
                 </h4>
-                <p className="text-sm text-gray-600">{product.description}</p>
+                <p className="text-sm text-gray-600">
+                  {product.short_description}
+                </p>
                 <div className="flex items-center mt-2"></div>
               </div>
               <div className="text-right">
                 <p className="font-semibold text-gray-800 text-xl">
-                  ৳ {product.price}
+                  ৳ {product.sale_price}
                 </p>
               </div>
             </div>
@@ -184,7 +213,7 @@ const SingleOrder = () => {
           <div className="space-y-3">
             <div className="flex justify-between">
               <span className="text-gray-600">Subtotal</span>
-              <span className="text-gray-800">৳ {product.price}</span>
+              <span className="text-gray-800">৳ {product.sale_price}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-gray-600">Delivery charge</span>
@@ -195,7 +224,7 @@ const SingleOrder = () => {
             <div className="flex justify-between text-lg font-semibold">
               <span className="text-gray-800">Total Amount</span>
               <span className="text-price-text-500">
-                ৳ {Number(product.price) + Number(deliveryCharge)}
+                ৳ {Number(product.sale_price) + Number(deliveryCharge)}
               </span>
             </div>
           </div>

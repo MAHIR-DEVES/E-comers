@@ -23,13 +23,16 @@ const ProductDetails = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { addToCart } = useCart();
 
+  console.log(product);
+
   useEffect(() => {
     const fetchProduct = async () => {
       try {
         const response = await axios.get(
-          `https://online-buzz.vercel.app/products/${id}`
+          `${import.meta.env.VITE_API_URL}/api/products/${id}`
         );
-        setProduct(response.data);
+
+        setProduct(response.data.result.data);
       } catch (err) {
         console.error('Error fetching product:', err);
         setError('Failed to fetch product. Please try again.');
@@ -54,18 +57,44 @@ const ProductDetails = () => {
     return stars;
   };
 
-  let features = [];
-  if (product && product.keyFeatures) {
+  // Parse features from short_description or long_description
+  const getFeatures = () => {
+    if (!product) return [];
+
     try {
-      features = JSON.parse(product.keyFeatures); // string -> array
+      // Try to parse from short_description or create basic features
+      if (product.short_description) {
+        // Remove HTML tags and create features array
+        const cleanDescription = product.short_description.replace(
+          /<[^>]*>/g,
+          ''
+        );
+        return cleanDescription
+          .split('.')
+          .filter(item => item.trim().length > 0);
+      }
     } catch (err) {
-      console.error('Error parsing keyFeatures', err);
+      console.error('Error parsing features', err);
     }
-  }
+
+    // Fallback features
+    return [
+      'High quality material',
+      'Premium design',
+      'Durable construction',
+      'Excellent value for money',
+    ];
+  };
 
   if (loading) return <p className="text-center mt-20">Loading...</p>;
   if (error) return <p className="text-center mt-20 text-red-500">{error}</p>;
   if (!product) return <p className="text-center mt-20">Product not found.</p>;
+
+  const features = getFeatures();
+  const discount =
+    product.sale_price < product.price
+      ? Math.round(((product.price - product.sale_price) / product.price) * 100)
+      : 0;
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
@@ -81,7 +110,7 @@ const ProductDetails = () => {
             <li className="flex items-center">
               <span className="text-gray-400 mx-2">/</span>
               <span className="text-gray-700 font-medium">
-                {product.category}
+                {product.category_id || 'Product'}
               </span>
             </li>
           </ol>
@@ -93,13 +122,19 @@ const ProductDetails = () => {
             <div className="space-y-4">
               <div className="relative h-80 md:h-96 bg-gray-100 rounded-lg overflow-hidden">
                 <img
-                  src={product.image}
-                  alt={product.name}
+                  src={
+                    product.image
+                      ? `${import.meta.env.VITE_API_URL}/product/${
+                          product.image
+                        }`
+                      : '/placeholder.png'
+                  }
+                  alt={product.title}
                   className="w-full h-full object-contain"
                 />
-                {product.discount > 0 && (
+                {discount > 0 && (
                   <div className="absolute top-4 left-4 bg-red-500 text-white font-bold px-3 py-1 rounded-md">
-                    {product.discount}% OFF
+                    {discount}% OFF
                   </div>
                 )}
               </div>
@@ -108,29 +143,31 @@ const ProductDetails = () => {
             {/* Product Info */}
             <div className="py-4">
               <h1 className="text-3xl font-bold text-text-2-500 mb-2">
-                {product.name}
+                {product.title}
               </h1>
 
               {/* Rating */}
               <div className="flex items-center mb-4">
-                <div className="flex mr-2">{renderRating(product.rating)}</div>
+                <div className="flex mr-2">
+                  {renderRating(product.avgreating || 0)}
+                </div>
                 <span className="text-text-2-500">
-                  ({product.reviews} reviews)
+                  ({product.total_rating || 0} reviews)
                 </span>
               </div>
 
               {/* Price */}
               <div className="mb-6">
-                {product.discountPrice ? (
+                {product.sale_price && product.sale_price < product.price ? (
                   <div className="flex items-center">
                     <span className="text-3xl font-bold text-price-text-500">
-                      ৳ {product.discountPrice}
+                      ৳ {product.sale_price}
                     </span>
                     <span className="text-xl text-text-3-500 line-through ml-3">
                       ৳ {product.price}
                     </span>
                     <span className="ml-4 bg-product-btn-hover-500 text-green-600 px-2 py-1 rounded-md text-sm font-medium">
-                      Save৳ {(product.price - product.discountPrice).toFixed(2)}
+                      Save ৳ {(product.price - product.sale_price).toFixed(2)}
                     </span>
                   </div>
                 ) : (
@@ -142,7 +179,13 @@ const ProductDetails = () => {
 
               {/* Description */}
               <p className="text-text-3-500 mb-6 leading-relaxed">
-                {product.description}
+                {product.short_description
+                  ? product.short_description.replace(/<[^>]*>/g, '')
+                  : product.long_description
+                  ? product.long_description
+                      .replace(/<[^>]*>/g, '')
+                      .substring(0, 200) + '...'
+                  : 'No description available.'}
               </p>
 
               {/* Features */}
@@ -152,7 +195,7 @@ const ProductDetails = () => {
                 </h3>
                 <ol className="list-disc list-inside text-text-3-500 space-y-1">
                   {features.map((feature, index) => (
-                    <li key={index}>{feature}</li>
+                    <li key={index}>{feature.trim()}</li>
                   ))}
                 </ol>
               </div>
@@ -183,9 +226,10 @@ const ProductDetails = () => {
                       onClick={() => setIsModalOpen(true)}
                       className="flex-1 bg-primary-500 hover:bg-product-btn-hover-1-500 text-white py-2 rounded-lg flex items-center justify-center transition-colors"
                     >
-                      <MdOutlineShoppingBag className="mr-2" /> Order Now
+                      <MdOutlineShoppingBag className="mr-2 hidden md:block" />{' '}
+                      Order Now
                     </button>
-                    {/* Modal */}
+
                     <OrderModal
                       isOpen={isModalOpen}
                       onClose={() => setIsModalOpen(false)}
@@ -193,10 +237,20 @@ const ProductDetails = () => {
                     />
 
                     <button
-                      onClick={() => addToCart(product)}
-                      className="flex-1 bg-primary-500 hover:bg-product-btn-hover-1-500 text-white py-2 rounded-lg flex items-center justify-center transition-colors"
+                      onClick={() =>
+                        addToCart({
+                          ...product,
+                          name: product.title,
+                          discountPrice: product.sale_price,
+                          image: product.image
+                            ? `https://your-domain.com/images/${product.image}`
+                            : '/placeholder-image.jpg',
+                        })
+                      }
+                      className="flex-1 bg-primary-500 hover:bg-product-btn-hover-1-500 text-white py-1  md:py-2 rounded-lg flex items-center justify-center transition-colors"
                     >
-                      <FaShoppingCart className="mr-2" /> Add to Cart
+                      <FaShoppingCart className="mr-2 hidden md:block" /> Add to
+                      Cart
                     </button>
                   </div>
                 </div>
@@ -210,7 +264,15 @@ const ProductDetails = () => {
                   </div>
                   <div>
                     <span className="font-medium">Category:</span>{' '}
-                    {product.category}
+                    {product.category_id || 'N/A'}
+                  </div>
+                  <div>
+                    <span className="font-medium">Brand:</span>{' '}
+                    {product.brand_id || 'N/A'}
+                  </div>
+                  <div>
+                    <span className="font-medium">Shipping Cost:</span> ৳{' '}
+                    {product.shipping_cost || 0}
                   </div>
                 </div>
               </div>

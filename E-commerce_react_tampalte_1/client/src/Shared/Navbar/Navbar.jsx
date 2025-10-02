@@ -41,9 +41,10 @@ const Navbar = () => {
     }
 
     try {
-      const res = await axios.get(
-        `https://online-buzz.vercel.app/get-products/search?q=${query}`
+      const res = await axios.post(
+        `https://admin.prothomashop.com/api/products/search?search=${query}`
       );
+
       setSearchResults(res.data);
     } catch (err) {
       console.error(err);
@@ -173,7 +174,7 @@ const Navbar = () => {
 
             {/* Dropdown results */}
             {searchResults.length > 0 && isSearchFocused && (
-              <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-lg shadow-xl border border-gray-100 overflow-hidden z-50">
+              <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-lg shadow-xl border border-gray-100 overflow-hidden z-50 h-[500px] overflow-y-scroll">
                 <div className="py-2">
                   <div className="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">
                     Search Results ({searchResults.length})
@@ -186,14 +187,20 @@ const Navbar = () => {
                     >
                       <div className="flex-shrink-0 mr-3">
                         <img
-                          src={item.image || 'https://via.placeholder.com/40'}
+                          src={
+                            item.image
+                              ? `${import.meta.env.VITE_API_URL}/product/${
+                                  item.image
+                                }`
+                              : '/placeholder.png'
+                          }
                           alt={item.name}
                           className="w-10 h-10 rounded object-cover"
                         />
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-medium text-gray-800 truncate">
-                          {item.name}
+                          {item.title}
                         </p>
                         <p className="text-xs text-gray-500 truncate">
                           {item.category}
@@ -357,7 +364,11 @@ const Navbar = () => {
                           <div className="flex-shrink-0 mr-3">
                             <img
                               src={
-                                item.image || 'https://via.placeholder.com/40'
+                                item.image
+                                  ? `${import.meta.env.VITE_API_URL}/product/${
+                                      item.image
+                                    }`
+                                  : '/placeholder.png'
                               }
                               alt={item.name}
                               className="w-8 h-8 rounded object-cover"
@@ -365,7 +376,7 @@ const Navbar = () => {
                           </div>
                           <div className="flex-1 min-w-0">
                             <p className="text-sm font-medium text-gray-800 truncate">
-                              {item.name}
+                              {item.title}
                             </p>
                           </div>
                           <div className="ml-2">

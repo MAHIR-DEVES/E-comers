@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const OrderModal = ({ isOpen, onClose, product }) => {
-  const navigate = useNavigate(); // redirect করার জন্য
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     mobile: '',
@@ -19,6 +19,11 @@ const OrderModal = ({ isOpen, onClose, product }) => {
     setFormData({ ...formData, [name]: value });
   };
 
+  // ✅ এক জায়গায় deliveryCharge & totalPrice হিসাব
+  const deliveryCharge = formData.deliveryOption === 'inside_dhaka' ? 60 : 120;
+  const productPrice = Number(product.sale_price) || 0;
+  const totalPrice = productPrice + deliveryCharge;
+
   const handleSubmit = e => {
     e.preventDefault();
 
@@ -26,32 +31,25 @@ const OrderModal = ({ isOpen, onClose, product }) => {
       return alert('সব ইনপুট ফিল্ড পূরণ করুন!');
     }
 
-    const deliveryCharge =
-      formData.deliveryOption === 'inside_dhaka' ? 60 : 120;
-    const totalPrice = Number(product.price) + deliveryCharge;
-
     console.log('Order submitted:', { ...formData, product, totalPrice });
 
-    toast.success(`অর্ডার সফল! মোট:  ৳${totalPrice}`, {
+    toast.success(`অর্ডার সফল! মোট: ৳${totalPrice}`, {
       position: 'top-right',
       autoClose: 3000,
     });
 
-    // ফর্ম সাবমিটের পরে redirect
     navigate('/single-order', {
       state: {
         product,
         customer: formData,
         totalPrice,
         deliveryCharge,
+        orderDate: new Date().toISOString(),
       },
     });
 
     onClose();
   };
-
-  const deliveryCharge = formData.deliveryOption === 'inside_dhaka' ? 60 : 120;
-  const totalPrice = Number(product.price) + deliveryCharge;
 
   return (
     <div className="fixed inset-0 backdrop-blur-xs bg-opacity-40 flex items-center justify-center z-50 p-4">
@@ -67,13 +65,19 @@ const OrderModal = ({ isOpen, onClose, product }) => {
         {/* Product Info */}
         <div className="p-5 flex gap-4 border-b">
           <img
-            src={product.image}
-            alt={product.name}
+            src={
+              product.image
+                ? `${import.meta.env.VITE_API_URL}/product/${product.image}`
+                : '/placeholder.png'
+            }
+            alt={product.title}
             className="w-20 h-20 object-cover rounded-md"
           />
           <div>
-            <h3 className="font-semibold text-text-2-500">{product.name}</h3>
-            <p className="text-price-text-500 font-bold">৳ {product.price}</p>
+            <h3 className="font-semibold text-text-2-500">{product.title}</h3>
+            <p className="text-price-text-500 font-bold">
+              ৳ {product.sale_price}
+            </p>
           </div>
         </div>
 
@@ -172,7 +176,7 @@ const OrderModal = ({ isOpen, onClose, product }) => {
             </h3>
             <div className="flex justify-between mb-2">
               <span>পণ্যের মূল্য:</span>
-              <span>৳ {product.price}</span>
+              <span>৳ {product.sale_price}</span>
             </div>
             <div className="flex justify-between mb-2">
               <span>ডেলিভারি চার্জ:</span>
@@ -195,7 +199,6 @@ const OrderModal = ({ isOpen, onClose, product }) => {
               বাতিল
             </button>
 
-            {/* Submit Button */}
             <button
               type="submit"
               className="flex-1 bg-primary-500 hover:bg-product-btn-hover-1-500 text-white py-2 rounded-md"

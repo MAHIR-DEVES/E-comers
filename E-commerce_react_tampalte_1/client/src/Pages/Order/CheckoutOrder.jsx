@@ -214,12 +214,18 @@ const CheckoutOrder = () => {
                     >
                       <td className="py-3 px-4">
                         <img
-                          src={item.image}
-                          alt={item.name}
+                          src={
+                            item.image
+                              ? `${import.meta.env.VITE_API_URL}/product/${
+                                  item.image
+                                }`
+                              : '/placeholder.png'
+                          }
+                          alt={item.title}
                           className="w-16 h-16 object-cover rounded"
                         />
                       </td>
-                      <td className="py-3 px-4">{item.name}</td>
+                      <td className="py-3 px-4">{item.title}</td>
                       <td className="py-3 px-4">
                         ৳ {(item.discountPrice || item.price).toFixed(2)}
                       </td>

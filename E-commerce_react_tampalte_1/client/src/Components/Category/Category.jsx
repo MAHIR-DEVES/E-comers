@@ -5,15 +5,16 @@ import { FaChevronRight, FaChevronLeft, FaArrowRight } from 'react-icons/fa';
 const Category = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [category, setCategory] = useState([]);
-  const [visibleItems, setVisibleItems] = useState(5); // Number of visible items based on screen size
+  const [visibleItems, setVisibleItems] = useState(5);
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get(
-          'https://online-buzz.vercel.app/categories'
+          `${import.meta.env.VITE_API_URL}/api/category`
         );
-        setCategory(response.data); // set state with API data
+
+        setCategory(response?.data?.result);
       } catch (error) {
         console.error('Error fetching latest products:', error);
       }
@@ -123,7 +124,11 @@ const Category = () => {
                   <div className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group">
                     <div className="relative overflow-hidden">
                       <img
-                        src={cat.image}
+                        src={
+                          cat.image
+                            ? `${import.meta.env.VITE_API_URL}/${cat.image}`
+                            : '/placeholder.png'
+                        }
                         alt={cat.name}
                         className="w-full h-40 object-cover transition-transform duration-500 group-hover:scale-110"
                       />
@@ -134,9 +139,7 @@ const Category = () => {
                       <h3 className="font-semibold text-text-2-500 mb-1">
                         {cat.name}
                       </h3>
-                      <p className="text-sm text-text-3-500">
-                        {cat.products} products
-                      </p>
+
                       <button className="mt-3 text-sm text-primary-500 font-medium hover:text-product-btn-hover-1-500  transition-colors">
                         Explore now
                       </button>

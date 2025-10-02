@@ -1,11 +1,5 @@
 import React, { useState } from 'react';
-import {
-  FaTimes,
-  FaPhone,
-  FaMapMarkerAlt,
-  FaTruck,
-  FaTrash,
-} from 'react-icons/fa';
+import { FaTimes, FaPhone, FaMapMarkerAlt, FaTrash } from 'react-icons/fa';
 import { useCart } from '../../Context/CartContext';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -17,7 +11,6 @@ const CheckoutModal = ({ isOpen, onClose, total, cartItems }) => {
     name: '',
     mobile: '',
     address: '',
-
     deliveryOption: 'inside_dhaka',
   });
 
@@ -25,10 +18,7 @@ const CheckoutModal = ({ isOpen, onClose, total, cartItems }) => {
 
   const handleInputChange = e => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleOrder = e => {
@@ -45,23 +35,26 @@ const CheckoutModal = ({ isOpen, onClose, total, cartItems }) => {
       return;
     }
 
+    const deliveryCharge = deliveryOption === 'inside_dhaka' ? 60 : 120;
+    const finalTotal = total + deliveryCharge;
+
     const orderData = {
       customer: formData,
       cartItems,
-      total: total + (deliveryOption === 'inside_dhaka' ? 60 : 120),
-      deliveryCharge: deliveryOption === 'inside_dhaka' ? 60 : 120,
+      total: finalTotal,
+      deliveryCharge,
     };
 
-    toast.success(`অর্ডার সফল! মোট: ৳${orderData.total.toFixed(2)}`);
+    toast.success(`অর্ডার সফল! মোট: ৳${finalTotal.toFixed(2)}`);
     onClose();
     navigate('/checkout-order', { state: orderData });
   };
 
   return (
-    <div className="fixed inset-0 backdrop-blur-sm  bg-opacity-50 flex items-center justify-center z-50 p-4">
+    <div className="fixed inset-0 backdrop-blur-sm bg-opacity-50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-lg w-full max-w-md md:max-w-2xl relative max-h-[90vh] overflow-y-auto">
         {/* Header */}
-        <div className="bg-primary-500 text-text-1-500 p-4 rounded-t-lg">
+        <div className="bg-primary-500 text-white p-4 rounded-t-lg relative">
           <h2 className="text-xl font-semibold text-center">
             অর্ডার সম্পূর্ণ করুন
           </h2>
@@ -73,6 +66,7 @@ const CheckoutModal = ({ isOpen, onClose, total, cartItems }) => {
           </button>
         </div>
 
+        {/* Cart Items */}
         <div className="max-h-72 overflow-y-auto">
           {cartItems.map(item => (
             <div
@@ -81,28 +75,32 @@ const CheckoutModal = ({ isOpen, onClose, total, cartItems }) => {
             >
               <div className="flex-shrink-0 w-14 h-14 bg-gray-200 rounded-md overflow-hidden">
                 <img
-                  src={item.image}
-                  alt={item.name}
+                  src={
+                    item.image
+                      ? `${import.meta.env.VITE_API_URL}/product/${item.image}`
+                      : '/placeholder.png'
+                  }
+                  alt={item.title || item.name}
                   className="w-full h-full object-cover"
                 />
               </div>
 
               <div className="ml-3 flex-1 min-w-0">
-                <h5 className="text-sm font-medium text-text-2-500 truncate">
-                  {item.name}
+                <h5 className="text-sm font-medium text-gray-800 truncate">
+                  {item.title || item.name}
                 </h5>
-                <p className="text-xs text-text-3-500">{item.brand}</p>
+                <p className="text-xs text-gray-500">
+                  {item.brand?.name || item.category?.name || 'No Brand'}
+                </p>
                 <div className="flex items-center justify-between mt-1">
-                  <span className="text-sm font-bold text-price-text-500">
-                    ${item.discountPrice || item.price}
+                  <span className="text-sm font-bold text-purple-700">
+                    ৳ {item.sale_price || item.price}
                   </span>
-
                   <span>
-                    <span className="mr-5"> x {item.quantity || 1}</span>৳
+                    <span className="mr-5">x {item.quantity || 1}</span>৳
                     <span className="ml-0.5">
                       {(
-                        (item.discountPrice || item.price) *
-                        (item.quantity || 1)
+                        (item.sale_price || item.price) * (item.quantity || 1)
                       ).toFixed(2)}
                     </span>
                   </span>
@@ -119,16 +117,16 @@ const CheckoutModal = ({ isOpen, onClose, total, cartItems }) => {
             </div>
           ))}
         </div>
+
+        {/* Checkout Form */}
         <form onSubmit={handleOrder} className="p-5">
-          {/* Customer Information */}
           <div className="mb-6">
-            <h3 className="text-sm font-medium text-text-2-500 mb-3 flex items-center">
-              <FaMapMarkerAlt className="mr-2 text-primary-500" />
-              ডেলিভারি তথ্য
+            <h3 className="text-sm font-medium text-gray-800 mb-3 flex items-center">
+              <FaMapMarkerAlt className="mr-2 text-primary-500" /> ডেলিভারি তথ্য
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-text-2-500 mb-1">
+                <label className="block text-sm font-medium text-gray-800 mb-1">
                   নাম *
                 </label>
                 <input
@@ -141,11 +139,9 @@ const CheckoutModal = ({ isOpen, onClose, total, cartItems }) => {
                   placeholder="আপনার পুরো নাম"
                 />
               </div>
-
               <div>
-                <label className="block text-sm font-medium text-text-2-500 mb-1 flex items-center">
-                  <FaPhone className="mr-1 text-sm text-primary-500" />
-                  মোবাইল নম্বর *
+                <label className="block text-sm font-medium text-gray-800 mb-1 flex items-center">
+                  <FaPhone className="mr-1 text-primary-500" /> মোবাইল নম্বর *
                 </label>
                 <input
                   type="tel"
@@ -161,58 +157,48 @@ const CheckoutModal = ({ isOpen, onClose, total, cartItems }) => {
             </div>
           </div>
 
-          {/* Delivery Information */}
           <div className="mb-6">
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-text-2-500 bg-white mb-1">
-                সম্পূর্ণ ঠিকানা *
+            <label className="block text-sm font-medium text-gray-800 mb-1">
+              সম্পূর্ণ ঠিকানা *
+            </label>
+            <textarea
+              name="address"
+              value={formData.address}
+              onChange={handleInputChange}
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+              rows="2"
+              required
+              placeholder="বাড়ি নং, রোড নাম, এলাকা"
+            />
+            <div className="mt-4 flex space-x-4">
+              <label className="flex items-center">
+                <input
+                  type="radio"
+                  name="deliveryOption"
+                  value="inside_dhaka"
+                  checked={formData.deliveryOption === 'inside_dhaka'}
+                  onChange={handleInputChange}
+                  className="text-primary-500 focus:ring-purple-500"
+                />
+                <span className="ml-2">ঢাকার ভিতরে (৳ ৬০)</span>
               </label>
-              <textarea
-                name="address"
-                value={formData.address}
-                onChange={handleInputChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
-                rows="2"
-                required
-                placeholder="বাড়ি নং, রোড নাম, এলাকা"
-              />
-            </div>
-
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-3 flex items-center">
-                <FaTruck className="mr-2 text-primary-500" />
-                ডেলিভারি অপশন *
+              <label className="flex items-center">
+                <input
+                  type="radio"
+                  name="deliveryOption"
+                  value="outside_dhaka"
+                  checked={formData.deliveryOption === 'outside_dhaka'}
+                  onChange={handleInputChange}
+                  className="text-primary-500 focus:ring-purple-500"
+                />
+                <span className="ml-2">ঢাকার বাইরে (৳ ১২০)</span>
               </label>
-              <div className="flex space-x-4">
-                <label className="flex items-center">
-                  <input
-                    type="radio"
-                    name="deliveryOption"
-                    value="inside_dhaka"
-                    checked={formData.deliveryOption === 'inside_dhaka'}
-                    onChange={handleInputChange}
-                    className="text-primary-500 focus:ring-purple-500"
-                  />
-                  <span className="ml-2">ঢাকার ভিতরে (৳ ৬০)</span>
-                </label>
-                <label className="flex items-center">
-                  <input
-                    type="radio"
-                    name="deliveryOption"
-                    value="outside_dhaka"
-                    checked={formData.deliveryOption === 'outside_dhaka'}
-                    onChange={handleInputChange}
-                    className="text-primary-500 focus:ring-purple-500"
-                  />
-                  <span className="ml-2">ঢাকার বাইরে (৳ ১২০)</span>
-                </label>
-              </div>
             </div>
           </div>
 
           {/* Order Summary */}
           <div className="bg-gray-50 p-4 rounded-lg mb-6">
-            <h3 className="text-lg font-medium text-text-2-500 mb-3">
+            <h3 className="text-lg font-medium text-gray-800 mb-3">
               অর্ডার সারাংশ
             </h3>
             <div className="flex justify-between mb-2">
@@ -222,15 +208,12 @@ const CheckoutModal = ({ isOpen, onClose, total, cartItems }) => {
             <div className="flex justify-between mb-2">
               <span>ডেলিভারি চার্জ:</span>
               <span>
-                ৳{' '}
-                {formData.deliveryOption === 'inside_dhaka'
-                  ? '60.00'
-                  : '120.00'}
+                ৳ {formData.deliveryOption === 'inside_dhaka' ? 60 : 120}
               </span>
             </div>
             <div className="flex justify-between font-bold text-lg border-t pt-2">
               <span>মোট :</span>
-              <span className="text-price-text-500">
+              <span>
                 ৳{' '}
                 {(
                   total +
@@ -240,7 +223,6 @@ const CheckoutModal = ({ isOpen, onClose, total, cartItems }) => {
             </div>
           </div>
 
-          {/* Action Buttons */}
           <div className="flex space-x-3">
             <button
               type="button"
@@ -251,7 +233,7 @@ const CheckoutModal = ({ isOpen, onClose, total, cartItems }) => {
             </button>
             <button
               type="submit"
-              className="flex-1 bg-primary-500 hover:bg-product-btn-hover-1-500 text-white py-2.5 rounded-md font-medium transition-colors"
+              className="flex-1 bg-primary-500 hover:bg-purple-700 text-white py-2.5 rounded-md font-medium transition-colors"
             >
               পেমেন্ট
             </button>
