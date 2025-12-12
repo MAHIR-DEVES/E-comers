@@ -185,9 +185,9 @@ const Footer = () => {
             <Link
               className="text-blue-400"
               target="_blank"
-              to={'https://creativesoftware.com.bd/'}
+              to={'https://my-portfolio-mahir-deves-projects.vercel.app/'}
             >
-              Creative Software
+              Meherab Hossain
             </Link>
           </p>
         </div>

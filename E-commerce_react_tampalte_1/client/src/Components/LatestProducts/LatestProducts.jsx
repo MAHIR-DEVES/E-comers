@@ -23,17 +23,19 @@ const LatestProducts = () => {
     fetchProducts();
   }, []);
 
-  // Responsive visible items
+  // Responsive visible items - UPDATED FOR 2 ITEMS ON SMALL DEVICES
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 640) {
-        setVisibleItems(1);
+      if (window.innerWidth < 480) {
+        setVisibleItems(2); // Very small screens: 2 items
+      } else if (window.innerWidth < 640) {
+        setVisibleItems(2); // Small mobile: 2 items
       } else if (window.innerWidth < 768) {
-        setVisibleItems(2);
+        setVisibleItems(3); // Tablet: 3 items
       } else if (window.innerWidth < 1024) {
-        setVisibleItems(3);
+        setVisibleItems(3); // Small desktop: 3 items
       } else {
-        setVisibleItems(4);
+        setVisibleItems(4); // Large desktop: 4 items
       }
     };
 
@@ -68,10 +70,10 @@ const LatestProducts = () => {
   };
 
   return (
-    <div className="py-10">
+    <div className="pb-10">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between mb-8">
+        <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 ml-3 md:ml-0">
           <div className="flex items-center mb-4 md:mb-0">
             <div className="bg-primary-500 text-white p-2 rounded-lg mr-3">
               <FaFire className="text-xl" />
@@ -125,7 +127,7 @@ const LatestProducts = () => {
                 <div
                   key={product.id}
                   className="flex-shrink-0"
-                  style={{ flex: `0 0 ${100 / visibleItems}%` }}
+                  style={{ width: `${100 / visibleItems}%` }}
                 >
                   <ProductCard product={product} />
                 </div>
@@ -161,7 +163,7 @@ const LatestProducts = () => {
                   currentIndex >= index * visibleItems &&
                   currentIndex < (index + 1) * visibleItems
                     ? 'bg-primary-500 w-6'
-                    : 'bg-primary-500'
+                    : 'bg-primary-500 opacity-30'
                 }`}
                 aria-label={`Go to slide ${index + 1}`}
               />

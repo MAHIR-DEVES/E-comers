@@ -9,27 +9,38 @@ import Banner4 from '../../assets/banner4.png';
 
 const Banner = () => {
   const settings = {
-    dots: true, // নিচে ডট দেখাবে
-    infinite: true, // লুপ চলবে
-    speed: 500,
+    dots: true,
+    infinite: true,
+    speed: 600,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplay: true, // Auto scroll হবে
-    autoplaySpeed: 3000,
-    arrows: true, // next prev arrow
+    autoplay: true,
+    autoplaySpeed: 2500,
+    arrows: true,
+    pauseOnHover: true,
   };
 
   const images = [Banner2, Banner1, Banner3, Banner4];
 
   return (
-    <div className="w-full max-w-7xl mx-auto mt-5">
+    <div className="w-full max-w-7xl mx-auto md:mt-5 ">
       <Slider {...settings}>
         {images.map((img, i) => (
           <div key={i}>
             <img
               src={img}
               alt={`Slide ${i}`}
-              className="w-full h-[400px] object-cover rounded-2xl"
+              className="
+                w-full 
+                h-[180px] 
+                sm:h-[260px] 
+                md:h-[350px] 
+                lg:h-[420px]
+                xl:h-[480px]
+                object-cover 
+                md:rounded-md 
+                shadow-lg
+              "
             />
           </div>
         ))}

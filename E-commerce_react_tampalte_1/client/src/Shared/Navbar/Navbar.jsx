@@ -77,11 +77,11 @@ const Navbar = () => {
   return (
     <nav className="bg-white shadow-lg sticky top-0 z-50">
       <div className="bg-sec-500 h-9 flex items-center justify-center">
-        <div className="max-w-7xl mx-auto px-6  text-[15px] text-text-1-500">
-          <Marquee>
-            পণ্য আপনার হাতের মুঠোয়, এক ক্লিকে পণ্য বুঝে পেয়ে , ডেলিভারি ম্যানকে
-            পেমেন্ট করুন। Thanks for shopping
-          </Marquee>
+        <div className="max-w-7xl mx-auto md:px-6  text-[15px] text-text-1-500">
+        <Marquee>
+  The product is at your fingertips. Receive your item with one click and pay the delivery man. Thanks for shopping!
+</Marquee>
+
         </div>
       </div>
       <div className="max-w-7xl mx-auto px-4">

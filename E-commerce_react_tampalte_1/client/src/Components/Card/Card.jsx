@@ -18,8 +18,8 @@ const Card = ({ icon, title, description }) => {
   };
 
   return (
-    <div className=" p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-100">
-      <div className="flex items-start space-x-4">
+    <div className="p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-100">
+      <div className=" items-start space-x-4">
         {/* icon */}
         <div className="bg-gray-100 p-3 rounded-full">
           {getIconComponent(icon)}
@@ -40,40 +40,39 @@ const CardSection = () => {
   const cardsData = [
     {
       icon: 'FaTruck',
-      title: 'দ্রুত ডেলিভারি',
-      description: 'অর্ডার করার ২৪ ঘন্টার মধ্যে ডেলিভারি নিশ্চিত করা হয়',
+      title: 'Fast Delivery',
+      description: 'We ensure delivery within 24 hours of placing an order.',
     },
     {
       icon: 'FaBoxOpen',
-      title: 'পরামর্শ',
-      description: 'পণ্য ডেলিভারি নেওয়ার সময় অবশ্যই ভালমত দেখে বুঝে নিবেন।',
+      title: 'Guidance',
+      description: 'Please verify the product properly at the time of delivery.',
     },
     {
       icon: 'FaCheckCircle',
-      title: 'গুণগত মান',
-      description: 'সমস্ত পণ্যের গুণগত মান নিশ্চিত করা হয় আমাদের দ্বারা',
+      title: 'Quality Assurance',
+      description: 'All products are guaranteed with top-level quality checks.',
     },
     {
       icon: 'FaShieldAlt',
-      title: 'সুরক্ষা গ্যারান্টি',
-      description: 'সমস্ত পণ্যের জন্য ৭ দিনের রিটার্ন এবং ওয়ারেন্টি সুবিধা',
+      title: 'Protection Guarantee',
+      description: 'Enjoy 7-day return and warranty facilities on all products.',
     },
   ];
 
   return (
-    <section className="py-12 ">
+    <section className="py-12">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gtext-2-500 mb-4">
-            আমাদের সেবাসমূহ
+        <div className="text-center mb-5 md:mb-12">
+          <h2 className="text-3xl font-bold text-text-2-500 mb-4">
+            Our Services
           </h2>
           <p className="text-text-3-500 max-w-2xl mx-auto">
-            আমরা আমাদের গ্রাহকদের জন্য সর্বোচ্চ মানের সেবা প্রদান করতে
-            প্রতিশ্রুতিবদ্ধ
+            We are committed to providing the highest quality services for our valued customers.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
           {cardsData.map((card, index) => (
             <Card
               key={index}
