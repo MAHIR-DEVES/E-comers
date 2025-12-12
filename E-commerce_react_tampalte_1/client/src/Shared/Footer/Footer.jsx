@@ -111,7 +111,7 @@ const Footer = () => {
           </div>
 
           {/* Customer Service */}
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-1 hidden md:block">
             <h4 className="text-lg font-semibold mb-4">Customer Service</h4>
             <ul className="space-y-2">
               <li>

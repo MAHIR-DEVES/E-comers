@@ -29,10 +29,10 @@ const ProductDetails = () => {
     const fetchProduct = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/api/products/${id}`
+          `${import.meta.env.VITE_API_URL}/products/${id}`
         );
 
-        setProduct(response.data.result.data);
+        setProduct(response.data);
       } catch (err) {
         console.error('Error fetching product:', err);
         setError('Failed to fetch product. Please try again.');
@@ -122,13 +122,7 @@ const ProductDetails = () => {
             <div className="space-y-4">
               <div className="relative h-80 md:h-96 bg-gray-100 rounded-lg overflow-hidden">
                 <img
-                  src={
-                    product.image
-                      ? `${import.meta.env.VITE_API_URL}/product/${
-                          product.image
-                        }`
-                      : '/placeholder.png'
-                  }
+                  src={product.image}
                   alt={product.title}
                   className="w-full h-full object-contain"
                 />
@@ -242,9 +236,7 @@ const ProductDetails = () => {
                           ...product,
                           name: product.title,
                           discountPrice: product.sale_price,
-                          image: product.image
-                            ? `https://your-domain.com/images/${product.image}`
-                            : '/placeholder-image.jpg',
+                          image: product.image,
                         })
                       }
                       className="flex-1 bg-primary-500 hover:bg-product-btn-hover-1-500 text-white py-1  md:py-2 rounded-lg flex items-center justify-center transition-colors"
@@ -260,11 +252,11 @@ const ProductDetails = () => {
               <div className="border-t border-gray-200 pt-4">
                 <div className="grid grid-cols-2 gap-4 text-sm text-text-3-500">
                   <div>
-                    <span className="font-medium">SKU:</span> {product.sku}
+                    <span className="font-medium">SKU:</span> {product.SKU}
                   </div>
                   <div>
                     <span className="font-medium">Category:</span>{' '}
-                    {product.category_id || 'N/A'}
+                    {product.Category || 'N/A'}
                   </div>
                   <div>
                     <span className="font-medium">Brand:</span>{' '}

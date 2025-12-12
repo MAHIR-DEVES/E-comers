@@ -19,9 +19,8 @@ const OrderModal = ({ isOpen, onClose, product }) => {
     setFormData({ ...formData, [name]: value });
   };
 
-  // ✅ এক জায়গায় deliveryCharge & totalPrice হিসাব
   const deliveryCharge = formData.deliveryOption === 'inside_dhaka' ? 60 : 120;
-  const productPrice = Number(product.sale_price) || 0;
+  const productPrice = Number(product.price) || 0;
   const totalPrice = productPrice + deliveryCharge;
 
   const handleSubmit = e => {
@@ -51,6 +50,8 @@ const OrderModal = ({ isOpen, onClose, product }) => {
     onClose();
   };
 
+  console.log(product);
+
   return (
     <div className="fixed inset-0 backdrop-blur-xs bg-opacity-40 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-lg w-full max-w-2xl relative max-h-[90vh] overflow-y-auto">
@@ -65,19 +66,13 @@ const OrderModal = ({ isOpen, onClose, product }) => {
         {/* Product Info */}
         <div className="p-5 flex gap-4 border-b">
           <img
-            src={
-              product.image
-                ? `${import.meta.env.VITE_API_URL}/product/${product.image}`
-                : '/placeholder.png'
-            }
-            alt={product.title}
+            src={product.image}
+            alt={product.name}
             className="w-20 h-20 object-cover rounded-md"
           />
           <div>
-            <h3 className="font-semibold text-text-2-500">{product.title}</h3>
-            <p className="text-price-text-500 font-bold">
-              ৳ {product.sale_price}
-            </p>
+            <h3 className="font-semibold text-text-2-500">{product.name}</h3>
+            <p className="text-price-text-500 font-bold">৳ {product.price}</p>
           </div>
         </div>
 
@@ -176,7 +171,7 @@ const OrderModal = ({ isOpen, onClose, product }) => {
             </h3>
             <div className="flex justify-between mb-2">
               <span>পণ্যের মূল্য:</span>
-              <span>৳ {product.sale_price}</span>
+              <span>৳ {product.price}</span>
             </div>
             <div className="flex justify-between mb-2">
               <span>ডেলিভারি চার্জ:</span>

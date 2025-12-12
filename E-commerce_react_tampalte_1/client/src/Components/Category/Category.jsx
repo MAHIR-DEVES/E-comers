@@ -11,10 +11,10 @@ const Category = () => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/api/category`
+          `${import.meta.env.VITE_API_URL}/categories`
         );
 
-        setCategory(response?.data?.result);
+        setCategory(response?.data);
       } catch (error) {
         console.error('Error fetching latest products:', error);
       }
@@ -124,11 +124,7 @@ const Category = () => {
                   <div className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group">
                     <div className="relative overflow-hidden">
                       <img
-                        src={
-                          cat.image
-                            ? `${import.meta.env.VITE_API_URL}/${cat.image}`
-                            : '/placeholder.png'
-                        }
+                        src={cat.image}
                         alt={cat.name}
                         className="w-full h-40 object-cover transition-transform duration-500 group-hover:scale-110"
                       />

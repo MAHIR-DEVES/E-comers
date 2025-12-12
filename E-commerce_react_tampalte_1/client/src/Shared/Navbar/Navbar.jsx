@@ -41,9 +41,10 @@ const Navbar = () => {
     }
 
     try {
-      const res = await axios.post(
-        `https://admin.prothomashop.com/api/products/search?search=${query}`
+      const res = await axios.get(
+        `https://online-buzz.vercel.app/get-products/search?q=${query}`
       );
+      console.log(res);
 
       setSearchResults(res.data);
     } catch (err) {
@@ -187,23 +188,17 @@ const Navbar = () => {
                     >
                       <div className="flex-shrink-0 mr-3">
                         <img
-                          src={
-                            item.image
-                              ? `${import.meta.env.VITE_API_URL}/product/${
-                                  item.image
-                                }`
-                              : '/placeholder.png'
-                          }
+                          src={item.image}
                           alt={item.name}
                           className="w-10 h-10 rounded object-cover"
                         />
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-medium text-gray-800 truncate">
-                          {item.title}
+                          {item.name}
                         </p>
                         <p className="text-xs text-gray-500 truncate">
-                          {item.category}
+                          {item.Category}
                         </p>
                       </div>
                       <div className="ml-2">
@@ -363,20 +358,14 @@ const Navbar = () => {
                         >
                           <div className="flex-shrink-0 mr-3">
                             <img
-                              src={
-                                item.image
-                                  ? `${import.meta.env.VITE_API_URL}/product/${
-                                      item.image
-                                    }`
-                                  : '/placeholder.png'
-                              }
+                              src={item.image}
                               alt={item.name}
                               className="w-8 h-8 rounded object-cover"
                             />
                           </div>
                           <div className="flex-1 min-w-0">
                             <p className="text-sm font-medium text-gray-800 truncate">
-                              {item.title}
+                              {item.name}
                             </p>
                           </div>
                           <div className="ml-2">

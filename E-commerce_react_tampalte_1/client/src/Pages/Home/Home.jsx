@@ -9,7 +9,7 @@ import Products from '../../Components/Products/Products';
 
 const Home = () => {
   return (
-    <div className="max-w-7xl mx-auto px-4">
+    <div className="max-w-7xl mx-auto md:px-4">
       <Banner></Banner>
       <Card></Card>
       <Category></Category>

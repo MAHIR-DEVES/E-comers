@@ -12,9 +12,9 @@ const LatestProducts = () => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get(`
-          ${import.meta.env.VITE_API_URL}/api/products/latest-product`);
+          ${import.meta.env.VITE_API_URL}/latest-products`);
 
-        setProducts(response.data.result.data);
+        setProducts(response?.data);
       } catch (error) {
         console.error('Error fetching latest products:', error);
       }

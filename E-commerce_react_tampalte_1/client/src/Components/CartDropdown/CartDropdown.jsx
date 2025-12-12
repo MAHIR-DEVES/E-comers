@@ -62,11 +62,7 @@ const CartDropdown = ({ setShowCart, openCheckoutModal }) => {
             >
               <div className="flex-shrink-0 w-14 h-14 bg-gray-200 rounded-md overflow-hidden">
                 <img
-                  src={
-                    item.image
-                      ? `${import.meta.env.VITE_API_URL}/product/${item.image}`
-                      : '/placeholder.png'
-                  }
+                  src={item.image}
                   alt={item.title || item.name}
                   className="w-full h-full object-cover"
                 />
