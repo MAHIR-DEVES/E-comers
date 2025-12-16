@@ -16,6 +16,8 @@ const SingleOrder = () => {
   const { product, customer, totalPrice, deliveryCharge, orderDate } =
     location.state || {};
 
+  console.log(product);
+
   if (!product) return <p>কোনও অর্ডার পাওয়া যায়নি।</p>;
 
   // date formatting
@@ -36,8 +38,8 @@ const SingleOrder = () => {
   }
 
   return (
-    <div className="min-h-screen bg-purple-50  py-8 px-4 font-sans">
-      <div className="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-lg">
+    <div className="min-h-screen bg-purple-50  py-8 px-2 font-sans">
+      <div className="max-w-4xl mx-auto bg-white p-3 md:p-8 rounded-xl shadow-lg">
         {/* Header */}
         <div className="text-center mb-10">
           <h1 className="text-3xl font-bold text-sec-500 mb-3">
@@ -175,30 +177,19 @@ const SingleOrder = () => {
             <div className="flex items-center space-x-4">
               <div className="w-20 h-20 bg-gray-200 rounded-lg flex items-center justify-center shadow-sm">
                 <span className="text-gray-500 text-sm">
-                  <img
-                    src={
-                      product.image
-                        ? `${import.meta.env.VITE_API_URL}/product/${
-                            product.image
-                          }`
-                        : '/placeholder.png'
-                    }
-                    alt={product.title}
-                  />
+                  <img src={product.image} alt={product.title} />
                 </span>
               </div>
               <div className="flex-1">
                 <h4 className="font-medium text-gray-800 text-lg">
-                  {product.title}
+                  {product.name}
                 </h4>
-                <p className="text-sm text-gray-600">
-                  {product.short_description}
-                </p>
+                <p className="text-sm text-gray-600">{product.description}</p>
                 <div className="flex items-center mt-2"></div>
               </div>
               <div className="text-right">
                 <p className="font-semibold text-gray-800 text-xl">
-                  ৳ {product.sale_price}
+                  ৳ {product.price}
                 </p>
               </div>
             </div>
@@ -213,7 +204,7 @@ const SingleOrder = () => {
           <div className="space-y-3">
             <div className="flex justify-between">
               <span className="text-gray-600">Subtotal</span>
-              <span className="text-gray-800">৳ {product.sale_price}</span>
+              <span className="text-gray-800">৳ {product.price}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-gray-600">Delivery charge</span>
@@ -224,7 +215,7 @@ const SingleOrder = () => {
             <div className="flex justify-between text-lg font-semibold">
               <span className="text-gray-800">Total Amount</span>
               <span className="text-price-text-500">
-                ৳ {Number(product.sale_price) + Number(deliveryCharge)}
+                ৳ {Number(product.price) + Number(deliveryCharge)}
               </span>
             </div>
           </div>

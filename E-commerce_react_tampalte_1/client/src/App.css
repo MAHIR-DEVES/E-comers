@@ -1,2 +1,15 @@
 @import 'tailwindcss';
 @plugin "daisyui";
+
+/* React Slick mobile overflow fix */
+.slick-slider {
+  overflow: hidden;
+}
+
+.slick-list {
+  overflow: hidden;
+}
+
+.slick-track {
+  display: flex;
+}

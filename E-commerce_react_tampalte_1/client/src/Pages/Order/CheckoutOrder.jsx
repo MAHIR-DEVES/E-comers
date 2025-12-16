@@ -35,8 +35,8 @@ const CheckoutOrder = () => {
   );
 
   return (
-    <div className="min-h-screen bg-purple-50 py-8 px-4 font-sans">
-      <div className="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-lg">
+    <div className="min-h-screen bg-purple-50 py-8 px-2 font-sans">
+      <div className="max-w-4xl mx-auto bg-white p-3 md:p-8 rounded-xl shadow-lg">
         {/* Header */}
         <div className="text-center mb-10">
           <h1 className="text-3xl font-bold text-price-text-500 mb-3">
@@ -214,13 +214,7 @@ const CheckoutOrder = () => {
                     >
                       <td className="py-3 px-4">
                         <img
-                          src={
-                            item.image
-                              ? `${import.meta.env.VITE_API_URL}/product/${
-                                  item.image
-                                }`
-                              : '/placeholder.png'
-                          }
+                          src={item.image}
                           alt={item.title}
                           className="w-16 h-16 object-cover rounded"
                         />

@@ -26,12 +26,12 @@ const CheckoutModal = ({ isOpen, onClose, total, cartItems }) => {
     const { name, mobile, address, deliveryOption } = formData;
 
     if (!name.trim() || !mobile.trim() || !address.trim()) {
-      alert('সব ফিল্ড পূরণ করুন।');
+      alert('Please fill all fields.');
       return;
     }
 
     if (!/^\d{11}$/.test(mobile)) {
-      toast.warning('মোবাইল নম্বর ১১ ডিজিট হতে হবে।');
+      toast.warning('Mobile number must be 11 digits.');
       return;
     }
 
@@ -45,7 +45,7 @@ const CheckoutModal = ({ isOpen, onClose, total, cartItems }) => {
       deliveryCharge,
     };
 
-    toast.success(`অর্ডার সফল! মোট: ৳${finalTotal.toFixed(2)}`);
+    toast.success(`Order successful! Total: ৳${finalTotal.toFixed(2)}`);
     onClose();
     navigate('/checkout-order', { state: orderData });
   };
@@ -56,7 +56,7 @@ const CheckoutModal = ({ isOpen, onClose, total, cartItems }) => {
         {/* Header */}
         <div className="bg-primary-500 text-white p-4 rounded-t-lg relative">
           <h2 className="text-xl font-semibold text-center">
-            অর্ডার সম্পূর্ণ করুন
+            Complete Your Order
           </h2>
           <button
             onClick={onClose}
@@ -118,12 +118,13 @@ const CheckoutModal = ({ isOpen, onClose, total, cartItems }) => {
         <form onSubmit={handleOrder} className="p-5">
           <div className="mb-6">
             <h3 className="text-sm font-medium text-gray-800 mb-3 flex items-center">
-              <FaMapMarkerAlt className="mr-2 text-primary-500" /> ডেলিভারি তথ্য
+              <FaMapMarkerAlt className="mr-2 text-primary-500" /> Delivery
+              Information
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-800 mb-1">
-                  নাম *
+                  Name *
                 </label>
                 <input
                   type="text"
@@ -132,12 +133,12 @@ const CheckoutModal = ({ isOpen, onClose, total, cartItems }) => {
                   onChange={handleInputChange}
                   className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
                   required
-                  placeholder="আপনার পুরো নাম"
+                  placeholder="Your full name"
                 />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-800 mb-1 flex items-center">
-                  <FaPhone className="mr-1 text-primary-500" /> মোবাইল নম্বর *
+                  <FaPhone className="mr-1 text-primary-500" /> Mobile Number *
                 </label>
                 <input
                   type="tel"
@@ -155,7 +156,7 @@ const CheckoutModal = ({ isOpen, onClose, total, cartItems }) => {
 
           <div className="mb-6">
             <label className="block text-sm font-medium text-gray-800 mb-1">
-              সম্পূর্ণ ঠিকানা *
+              Complete Address *
             </label>
             <textarea
               name="address"
@@ -164,7 +165,7 @@ const CheckoutModal = ({ isOpen, onClose, total, cartItems }) => {
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
               rows="2"
               required
-              placeholder="বাড়ি নং, রোড নাম, এলাকা"
+              placeholder="House No, Road Name, Area"
             />
             <div className="mt-4 flex space-x-4">
               <label className="flex items-center">
@@ -176,7 +177,7 @@ const CheckoutModal = ({ isOpen, onClose, total, cartItems }) => {
                   onChange={handleInputChange}
                   className="text-primary-500 focus:ring-purple-500"
                 />
-                <span className="ml-2">ঢাকার ভিতরে (৳ ৬০)</span>
+                <span className="ml-2">Inside Dhaka (৳ 60)</span>
               </label>
               <label className="flex items-center">
                 <input
@@ -187,7 +188,7 @@ const CheckoutModal = ({ isOpen, onClose, total, cartItems }) => {
                   onChange={handleInputChange}
                   className="text-primary-500 focus:ring-purple-500"
                 />
-                <span className="ml-2">ঢাকার বাইরে (৳ ১২০)</span>
+                <span className="ml-2">Outside Dhaka (৳ 120)</span>
               </label>
             </div>
           </div>
@@ -195,20 +196,20 @@ const CheckoutModal = ({ isOpen, onClose, total, cartItems }) => {
           {/* Order Summary */}
           <div className="bg-gray-50 p-4 rounded-lg mb-6">
             <h3 className="text-lg font-medium text-gray-800 mb-3">
-              অর্ডার সারাংশ
+              Order Summary
             </h3>
             <div className="flex justify-between mb-2">
-              <span>পণ্যের মূল্য:</span>
+              <span>Product Price:</span>
               <span>৳ {total.toFixed(2)}</span>
             </div>
             <div className="flex justify-between mb-2">
-              <span>ডেলিভারি চার্জ:</span>
+              <span>Delivery Charge:</span>
               <span>
                 ৳ {formData.deliveryOption === 'inside_dhaka' ? 60 : 120}
               </span>
             </div>
             <div className="flex justify-between font-bold text-lg border-t pt-2">
-              <span>মোট :</span>
+              <span>Total:</span>
               <span>
                 ৳{' '}
                 {(
@@ -225,13 +226,13 @@ const CheckoutModal = ({ isOpen, onClose, total, cartItems }) => {
               onClick={onClose}
               className="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-800 py-2.5 rounded-md font-medium transition-colors"
             >
-              বাতিল
+              Cancel
             </button>
             <button
               type="submit"
               className="flex-1 bg-primary-500 hover:bg-purple-700 text-white py-2.5 rounded-md font-medium transition-colors"
             >
-              পেমেন্ট
+              Proceed to Payment
             </button>
           </div>
         </form>
