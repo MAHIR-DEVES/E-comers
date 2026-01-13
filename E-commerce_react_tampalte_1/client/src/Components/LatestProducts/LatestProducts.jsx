@@ -2,21 +2,27 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FaFire, FaChevronRight, FaChevronLeft } from 'react-icons/fa';
 import ProductCard from '../ProductCatd/ProductCard';
+import ProductCardDemo from '../../Shared/spinner/ProductCardDemo';
 
 const LatestProducts = () => {
   const [products, setProducts] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visibleItems, setVisibleItems] = useState(4);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
+        setLoading(true);
         const response = await axios.get(`
           ${import.meta.env.VITE_API_URL}/latest-products`);
 
         setProducts(response?.data);
+        setLoading(false);
       } catch (error) {
         console.error('Error fetching latest products:', error);
+        setProducts([]);
+        setLoading(false);
       }
     };
 
@@ -123,15 +129,25 @@ const LatestProducts = () => {
                 }%)`,
               }}
             >
-              {products.map(product => (
-                <div
-                  key={product.id}
-                  className="flex-shrink-0"
-                  style={{ width: `${100 / visibleItems}%` }}
-                >
-                  <ProductCard product={product} />
-                </div>
-              ))}
+              {loading
+                ? Array.from({ length: visibleItems }).map((_, index) => (
+                    <div
+                      key={index}
+                      className="flex-shrink-0"
+                      style={{ width: `${100 / visibleItems}%` }}
+                    >
+                      <ProductCardDemo />
+                    </div>
+                  ))
+                : products.map(product => (
+                    <div
+                      key={product.id}
+                      className="flex-shrink-0"
+                      style={{ width: `${100 / visibleItems}%` }}
+                    >
+                      <ProductCard product={product} />
+                    </div>
+                  ))}
             </div>
           </div>
 
